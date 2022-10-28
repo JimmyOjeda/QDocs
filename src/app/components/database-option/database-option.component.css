@@ -1,0 +1,28 @@
+.option-container {
+    height: 23vh;
+    width: 23vw;
+    display: flex;
+    align-items: center;
+}
+
+.grid-item {
+    margin: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border-radius: 10%;
+    background-color: white;
+}
+
+img {
+    height: 20vh;
+    width: 20vh;
+    margin-left: 0vw;
+}
+
+h2 {
+    margin-left: 5vw;
+    font-weight: bold;
+    color: #222831;
+}
+
+a:link { text-decoration: none; }

@@ -1,0 +1,11 @@
+<app-toolbar></app-toolbar>
+    
+<app-sidenav>
+    
+    <div class="grid-container">
+        <app-database-option [imageSource]="imageSource" [database]="database" *ngFor="let database of databases">
+
+        </app-database-option>
+    </div>
+    
+</app-sidenav>

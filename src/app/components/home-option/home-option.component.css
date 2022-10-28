@@ -1,0 +1,23 @@
+.option-container {
+    margin: 10vh;
+    background-color: #222831;
+    width: 40vh;
+}
+
+.option-image {
+    text-align: center;
+}
+
+.option-image img {
+    height: 35vh;
+    width: 35vh;
+}
+
+.option-title {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 5vh;
+}
+
+a:link { text-decoration: none; }

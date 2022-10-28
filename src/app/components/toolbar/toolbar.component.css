@@ -1,0 +1,18 @@
+.toolbar {
+    height: 8vh;
+    background-color: #222831;
+}
+
+.title {
+    color: white;
+    font-family: fantasy;
+    font-size: 4vh;
+    margin: 0 auto;
+}
+
+.menu-button {
+    background-color: #222831;
+    color: white;
+    border: solid;
+    border-color: white;
+}

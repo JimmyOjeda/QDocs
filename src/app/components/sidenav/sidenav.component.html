@@ -1,0 +1,42 @@
+<mat-sidenav-container (backdropClick)="toggleSidenavService.close()">
+    <!--HTML de menu lateral-->
+    <mat-sidenav mode="over" [opened]="toggleSidenavService.isShowing">
+        
+        <a href="admin-home">
+            <img class="logo" src="../assets/Images/QDocsLogo.png" alt="Qdocs Logo">
+        </a>
+
+        <div class="menu">
+            <button mat-button class="menu-button" onclick="window.location.href='admin-home';">
+                <mat-icon>home</mat-icon>
+                <span>Admin Home</span>
+            </button>
+    
+            <mat-divider></mat-divider>
+    
+            <button mat-button class="menu-button" onclick="window.location.href='agent-home';">
+                <mat-icon>home</mat-icon>
+                <span>Agent Home</span>
+            </button>
+    
+            <mat-divider></mat-divider>
+    
+            <button mat-button class="menu-button">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </button>
+    
+            <mat-divider></mat-divider>
+    
+            <button mat-button class="menu-button">
+                <mat-icon>help</mat-icon>
+                <span>Help</span>
+            </button>
+        </div>
+    </mat-sidenav>
+
+    <!--HTML de contenido-->
+    <app-content>
+        <ng-content></ng-content>
+    </app-content>
+</mat-sidenav-container>
