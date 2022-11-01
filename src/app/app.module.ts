@@ -18,6 +18,9 @@ import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
 import { OptionComponent } from './components/option/option.component';
 import { DictionarySelectionComponent } from './views/dictionary-selection/dictionary-selection.component';
+import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionary-builder.component';
+import { ContentButtonComponent } from './components/content-button/content-button.component';
+import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-builder.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { DictionarySelectionComponent } from './views/dictionary-selection/dicti
     AgentHomeComponent,
     DatabaseSelectionComponent,
     OptionComponent,
-    DictionarySelectionComponent
+    DictionarySelectionComponent,
+    DictionaryBuilderComponent,
+    ContentButtonComponent,
+    SidenavBuilderComponent
   ],
   imports: [
     BrowserModule,
