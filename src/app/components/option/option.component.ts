@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OptionComponent implements OnInit {
 
   @Input() imageSource: String = "Not found";
-  @Input() database: any;
+  @Input() option: any;
 
   constructor() { }
 
