@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatabaseOptionComponent } from './database-option.component';
+import { OptionComponent } from './option.component';
 
-describe('DatabaseOptionComponent', () => {
-  let component: DatabaseOptionComponent;
-  let fixture: ComponentFixture<DatabaseOptionComponent>;
+describe('OptionComponent', () => {
+  let component: OptionComponent;
+  let fixture: ComponentFixture<OptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DatabaseOptionComponent ]
+      declarations: [ OptionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DatabaseOptionComponent);
+    fixture = TestBed.createComponent(OptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

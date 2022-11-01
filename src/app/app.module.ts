@@ -16,7 +16,7 @@ import { AdminHomeComponent } from './views/admin-home/admin-home.component';
 import { HomeOptionComponent } from './components/home-option/home-option.component';
 import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
-import { DatabaseOptionComponent } from './components/database-option/database-option.component';
+import { OptionComponent } from './components/option/option.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { DatabaseOptionComponent } from './components/database-option/database-o
     HomeOptionComponent,
     AgentHomeComponent,
     DatabaseSelectionComponent,
-    DatabaseOptionComponent
+    OptionComponent
   ],
   imports: [
     BrowserModule,
