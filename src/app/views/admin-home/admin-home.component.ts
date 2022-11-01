@@ -16,7 +16,7 @@ export class AdminHomeComponent implements OnInit {
     {
       "ImageSource" : "../assets/Images/diccionario.png",
       "Title" : "Diccionario",
-      "Link" : "enlace_diccionario.php"
+      "Link" : "dictionary-selection"
       }
   ]
 
