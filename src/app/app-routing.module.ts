@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './views/admin-home/admin-home.component';
 import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
+import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'database-selection',
     component: DatabaseSelectionComponent
+  },
+  {
+    path: 'template-selection',
+    component: TemplateSelectionComponent
   },
   {
     path: '**',
