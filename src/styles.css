@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+.link-container{
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.link-container:hover{
+  cursor: pointer;
+  color: white;
+  background-color: #222831;
+}
+
+.link-container:hover > a{
+  cursor: pointer;
+  color: white;
+  background-color: #222831;
+}
