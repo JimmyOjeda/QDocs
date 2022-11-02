@@ -17,6 +17,8 @@ import { HomeOptionComponent } from './components/home-option/home-option.compon
 import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
 import { OptionComponent } from './components/option/option.component';
+import { DatabaseDataModalComponent } from './components/database-data-modal/database-data-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { OptionComponent } from './components/option/option.component';
     HomeOptionComponent,
     AgentHomeComponent,
     DatabaseSelectionComponent,
-    OptionComponent
+    OptionComponent,
+    DatabaseDataModalComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { OptionComponent } from './components/option/option.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
