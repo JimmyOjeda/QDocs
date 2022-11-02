@@ -7,6 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DictionaryViewComponent implements OnInit {
 
+  foods = [
+    {
+      value: 'steak',
+      viewValue: 'Steak'
+    },
+    {
+      value: 'pizza',
+      viewValue: 'Pizza'
+    },
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

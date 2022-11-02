@@ -26,3 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
   background-color: #222831;
 }
+
+.dropdown{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
