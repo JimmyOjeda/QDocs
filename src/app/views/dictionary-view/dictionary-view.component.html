@@ -3,12 +3,17 @@
 <app-sidenav>
 
   <div class="container h-100">
-    <app-return-button [href]="'/template-selection'"></app-return-button>
-
     <div class="container h-75" style="margin-top: 30px;">
       <div class="row align-items-center h-20">
-        <h3 style="color: white;">Seleccione un diccionario</h3>
-        <p style="color: white;">Copie y pegue el token en su plantilla PDF</p>
+
+        <div class="module-header">
+          <app-return-button [href]="'/template-selection'"></app-return-button>
+          <div class="module-header-text">
+            <h3>Seleccione un diccionario</h3>
+            <p>Copie y pegue el token en su plantilla PDF</p>
+          </div>
+        </div>
+
         <div class="d-flex justify-content-center">
           <select class="w-50 dropdown" name="" id="">
             <option value="">Option 1</option>

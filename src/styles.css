@@ -32,3 +32,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 10px;
   border-radius: 10px;
 }
+
+.module-header{
+  display: flex;
+  align-items: center;
+}
+
+.module-header-text{
+  margin: 0 auto;
+  color: white;
+}
+
