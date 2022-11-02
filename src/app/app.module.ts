@@ -19,6 +19,7 @@ import { DatabaseSelectionComponent } from './views/database-selection/database-
 import { OptionComponent } from './components/option/option.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { ReturnButtonComponent } from './components/return-button/return-button.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view
     DatabaseSelectionComponent,
     OptionComponent,
     TemplateSelectionComponent,
-    DictionaryViewComponent
+    DictionaryViewComponent,
+    ReturnButtonComponent
   ],
   imports: [
     BrowserModule,
