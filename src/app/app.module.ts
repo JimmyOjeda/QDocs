@@ -18,6 +18,7 @@ import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
 import { OptionComponent } from './components/option/option.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
+import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TemplateSelectionComponent } from './views/template-selection/template-
     AgentHomeComponent,
     DatabaseSelectionComponent,
     OptionComponent,
-    TemplateSelectionComponent
+    TemplateSelectionComponent,
+    DictionaryViewComponent
   ],
   imports: [
     BrowserModule,
