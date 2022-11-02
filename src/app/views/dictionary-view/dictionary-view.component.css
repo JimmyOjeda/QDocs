@@ -10,3 +10,8 @@
   justify-content: space-around;
   padding: 10px;
 }
+
+.dictionary-container{
+  overflow-y: auto;
+  max-height: 100%;
+}
