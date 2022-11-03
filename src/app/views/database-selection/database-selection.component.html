@@ -3,9 +3,63 @@
 <app-sidenav-builder>
 
     <div class="grid-container">
-        <app-option [imageSource]="imageSource" [option]="database" *ngFor="let database of databases">
+        <app-option
+            [imageSource]="imageSource"
+            [option]="database"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="loadDatabaseData(database.id)"
+            *ngFor="let database of databases" >
 
         </app-option>
     </div>
 
 </app-sidenav-builder>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content form-container">
+        <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">
+                Editar conexión
+            </h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="databaseForm">
+                <p class="field-title">
+                    Nombre:
+                </p>
+                <input type="text" [class.is-invalid]="databaseForm.get('name')?.touched && databaseForm.get('name')?.invalid" class="form-control" formControlName="name">
+                <p class="field-title">
+                    Dirección:
+                </p>
+                <input type="text" [class.is-invalid]="databaseForm.get('direction')?.touched && databaseForm.get('direction')?.invalid" class="form-control" formControlName="direction">
+                <p class="field-title">
+                    Puerto:
+                </p>
+                <input type="text" [class.is-invalid]="databaseForm.get('port')?.touched && databaseForm.get('port')?.invalid" class="form-control" formControlName="port">
+                <p class="field-title">
+                    Usuario:
+                </p>
+                <input type="text" [class.is-invalid]="databaseForm.get('user')?.touched && databaseForm.get('user')?.invalid" class="form-control" formControlName="user">
+                <p class="field-title">
+                    Contraseña:
+                </p>
+                <input type="text" [class.is-invalid]="databaseForm.get('password')?.touched && databaseForm.get('password')?.invalid" class="form-control" formControlName="password">
+            </form>
+        </div>
+        <hr>
+        <div class="modal-footer">
+            <div class="save-button">
+                <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveDatabaseConfiguration()">
+                    <strong>
+                        Guardar
+                    </strong>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

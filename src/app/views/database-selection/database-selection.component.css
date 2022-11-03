@@ -4,3 +4,35 @@
     grid-template-columns: auto auto auto;
 }
 
+.form-container {
+    background-color: #222831;
+    color: white;
+}
+
+
+/*Estilos del modal*/
+.modal-title {
+    margin-left: auto;
+}
+
+.modal-footer {
+    border-top: none;
+    margin: 0 auto;
+}
+
+.save-button {
+    display: flex;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: white;
+    border-radius: 20px;
+    color: #222831;
+    border-color: #222831;
+}
+
+.field-title {
+    text-align: center;
+    margin-top: 5%;
+}
