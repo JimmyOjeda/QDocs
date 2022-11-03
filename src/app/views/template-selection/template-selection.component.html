@@ -1,0 +1,52 @@
+<app-toolbar [title]="'Plantillas'" ></app-toolbar>
+
+<app-sidenav-builder>
+  <div class="controls">
+    <button class="link-container" (click)="goToTemplateSelection()">
+        <a class="link">Diccionario de Datos</a>
+    </button>
+    <app-add-button (click)="createTemplateConfiguration()">
+
+    </app-add-button>
+  </div>
+  <div class="grid-container">
+    <app-option 
+      [imageSource]="imageSource" 
+      [option]="template" 
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="loadTemplateData(template.id)"
+      *ngFor="let template of templates">
+    
+    </app-option>
+  </div>
+</app-sidenav-builder>
+
+<app-modal>
+  <div class="header">
+    <h2 class="modal-title" id="exampleModalLabel">
+        {{modalTitle}} 
+    </h2>
+  </div>
+  <div class="body">
+    <form [formGroup]="templateForm">
+        <p class="field-title">
+            Nombre:
+        </p>
+        <input type="text" [class.is-invalid]="templateForm.get('name')?.touched && templateForm.get('name')?.invalid" class="form-control" formControlName="name">
+        <p class="field-title">
+            Archivo de plantilla:
+        </p>
+        <input type="file" [class.is-invalid]="templateForm.get('template')?.touched && templateForm.get('template')?.invalid" class="form-control" formControlName="template">
+    </form>
+  </div>
+  <div class="footer">
+    <div class="save-button">
+        <button type="button" [disabled]="templateForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveTemplateConfiguration()">
+            <strong>
+                Guardar
+            </strong>
+        </button>
+    </div>
+  </div>
+</app-modal>

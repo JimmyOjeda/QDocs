@@ -21,8 +21,13 @@ import { DictionarySelectionComponent } from './views/dictionary-selection/dicti
 import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionary-builder.component';
 import { ContentButtonComponent } from './components/content-button/content-button.component';
 import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-builder.component';
-import { DatabaseDataModalComponent } from './components/database-data-modal/database-data-modal.component';
+import { AddButtonComponent } from './components/add-button/add-button.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
+import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { ReturnButtonComponent } from './components/return-button/return-button.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     DictionaryBuilderComponent,
     ContentButtonComponent,
     SidenavBuilderComponent,
-    DatabaseDataModalComponent
+    AddButtonComponent,
+    TemplateSelectionComponent,
+    DictionaryViewComponent,
+    ReturnButtonComponent,
+    ModalComponent,
+    RemoveButtonComponent
   ],
   imports: [
     BrowserModule,

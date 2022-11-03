@@ -1,0 +1,12 @@
+
+/*Estilos del modal*/
+.modal-content {
+  background-color: #222831;
+  color: white;
+}
+
+.modal-footer {
+  border-top: none;
+  margin: 0 auto;
+}
+

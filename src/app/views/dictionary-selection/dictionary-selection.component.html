@@ -2,9 +2,9 @@
 
 <app-sidenav-builder>
   <div class="controls">
-    <button id="add-item" (click)="goToDictionaryBuilder()">
-      &plus;
-    </button>
+    <app-add-button (click)="goToDictionaryBuilder()">
+
+    </app-add-button>
   </div>
   <div class="grid-container">
         <app-option [imageSource]="imageSource" [option]="dictionary" *ngFor="let dictionary of dictionaries">

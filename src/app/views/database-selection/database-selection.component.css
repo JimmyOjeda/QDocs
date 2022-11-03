@@ -4,38 +4,15 @@
     grid-template-columns: auto auto auto;
 }
 
-.form-container {
-    background-color: #222831;
-    color: white;
-}
-
 .controls {
     width: 75%;
     display: flex;
     justify-content: flex-end;
 }
 
-#add-item {
-    font-size: 50px;
-    height: 80px;
-    width: 80px;
-    border-radius: 50px;
-}
-  
-
-/*Estilos del modal*/
-.modal-title {
-    margin-left: auto;
-}
-
-.modal-footer {
-    border-top: none;
-    margin: 0 auto;
-}
-
-.save-button {
-    display: flex;
-    text-align: center;
+.field-title {
+    text-align: left;
+    margin-top: 5%;
 }
 
 .btn-primary {
@@ -45,7 +22,3 @@
     border-color: #222831;
 }
 
-.field-title {
-    text-align: center;
-    margin-top: 5%;
-}

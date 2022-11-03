@@ -9,3 +9,16 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.field-title {
+  text-align: left;
+  margin-top: 5%;
+}
+
+.btn-primary {
+  background-color: white;
+  border-radius: 20px;
+  color: #222831;
+  border-color: #222831;
+}
+
