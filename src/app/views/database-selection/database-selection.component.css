@@ -9,6 +9,19 @@
     color: white;
 }
 
+.controls {
+    width: 75%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#add-item {
+    font-size: 50px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+}
+  
 
 /*Estilos del modal*/
 .modal-title {

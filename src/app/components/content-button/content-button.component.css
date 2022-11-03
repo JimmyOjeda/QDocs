@@ -1,0 +1,11 @@
+.content {
+  height: 88vh;
+  margin: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  background-color: #222831;
+}

@@ -1,0 +1,15 @@
+<app-toolbar></app-toolbar>
+
+<app-sidenav-builder>
+  <div class="controls">
+    <button id="add-item" (click)="goToDictionaryBuilder()">
+      &plus;
+    </button>
+  </div>
+  <div class="grid-container">
+        <app-option [imageSource]="imageSource" [option]="dictionary" *ngFor="let dictionary of dictionaries">
+
+        </app-option>
+    </div>
+
+</app-sidenav-builder>

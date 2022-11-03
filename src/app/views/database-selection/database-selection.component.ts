@@ -84,14 +84,20 @@ export class DatabaseSelectionComponent implements OnInit {
   });
 
   lastOptionOpened: number = 0;
+  modalTitle: string = "Crear conexión";
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  createDatabaseConfiguration () {
+    this.modalTitle = "Crear conexión";
+    this.databaseForm.reset();
+  }
+
   loadDatabaseData (id: number) {
-    
+    this.modalTitle = "Editar conexión";
     this.lastOptionOpened = id-1;
     let myId = id;
 

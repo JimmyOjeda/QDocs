@@ -1,7 +1,16 @@
 <app-toolbar></app-toolbar>
-    
-<app-sidenav>
-    
+
+<app-sidenav-builder>
+    <div class="controls">
+        <button 
+            id="add-item" 
+            data-bs-toggle="modal" 
+            data-bs-target="#exampleModal" 
+            (click)="createDatabaseConfiguration()">
+            
+            &plus;
+        </button>
+    </div>
     <div class="grid-container">
         <app-option 
             [imageSource]="imageSource" 
@@ -13,8 +22,9 @@
 
         </app-option>
     </div>
-    
-</app-sidenav>
+
+</app-sidenav-builder>
+
 
   
 <!-- Modal -->
@@ -23,7 +33,7 @@
       <div class="modal-content form-container">
         <div class="modal-header">
             <h2 class="modal-title" id="exampleModalLabel">
-                Editar conexión
+                {{modalTitle}} 
             </h2>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
