@@ -23,6 +23,9 @@ import { ContentButtonComponent } from './components/content-button/content-butt
 import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-builder.component';
 import { DatabaseDataModalComponent } from './components/database-data-modal/database-data-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
+import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { ReturnButtonComponent } from './components/return-button/return-button.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     DictionaryBuilderComponent,
     ContentButtonComponent,
     SidenavBuilderComponent,
-    DatabaseDataModalComponent
+    DatabaseDataModalComponent,
+    TemplateSelectionComponent,
+    DictionaryViewComponent,
+    ReturnButtonComponent
   ],
   imports: [
     BrowserModule,
