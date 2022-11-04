@@ -1,22 +1,24 @@
 .option-container {
-    height: 23vh;
-    width: 23vw;
-    display: flex;
-    align-items: center;
+  height: 23vh;
+  width: 23vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .grid-item {
     margin: 2vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
-    border-radius: 10%;
+    border-radius: 20px;
     background-color: white;
 }
 
 img {
-    height: 20vh;
-    width: 20vh;
-    margin-left: 0vw;
+  height: 10vh;
+  width: 10vh;
+  margin-top: 5px;
 }
 
 h2 {
@@ -25,4 +27,7 @@ h2 {
     color: #222831;
 }
 
-a:link { text-decoration: none; }
+a:link {
+  text-decoration: none;
+}
+

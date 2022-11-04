@@ -11,7 +11,7 @@ export class AgentHomeComponent implements OnInit {
     {
       "ImageSource" : "../assets/Images/plantilla.png",
       "Title" : "Plantillas",
-      "Link" : "enlace_plantillas.php"
+      "Link" : "/template-selection"
     },
     {
       "ImageSource" : "../assets/Images/documento.png",
@@ -19,7 +19,7 @@ export class AgentHomeComponent implements OnInit {
       "Link" : "enlace_documento.php"
       }
   ]
-  
+
   constructor() { }
 
   ngOnInit(): void {

@@ -5,6 +5,8 @@ import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
 import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionary-builder.component';
 import { DictionarySelectionComponent } from './views/dictionary-selection/dictionary-selection.component';
+import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'dictionary-builder',
     component: DictionaryBuilderComponent
+  },
+  {
+    path: 'template-selection',
+    component: TemplateSelectionComponent
+  },
+  {
+    path: 'data-dictionary',
+    component: DictionaryViewComponent
   },
   {
     path: '**',

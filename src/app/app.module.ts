@@ -21,6 +21,11 @@ import { DictionarySelectionComponent } from './views/dictionary-selection/dicti
 import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionary-builder.component';
 import { ContentButtonComponent } from './components/content-button/content-button.component';
 import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-builder.component';
+import { DatabaseDataModalComponent } from './components/database-data-modal/database-data-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
+import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { ReturnButtonComponent } from './components/return-button/return-button.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-bu
     DictionarySelectionComponent,
     DictionaryBuilderComponent,
     ContentButtonComponent,
-    SidenavBuilderComponent
+    SidenavBuilderComponent,
+    DatabaseDataModalComponent,
+    TemplateSelectionComponent,
+    DictionaryViewComponent,
+    ReturnButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +55,8 @@ import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-bu
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

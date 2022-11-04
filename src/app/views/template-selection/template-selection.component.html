@@ -1,0 +1,20 @@
+<app-toolbar [title]="'Plantillas'" ></app-toolbar>
+
+<app-sidenav>
+    <div class="container">
+      <div class="d-flex flex-row-reverse">
+        <span class="link-container" style="margin-left: 10px;">
+          <a class="link" href="/">Nuevo</a>
+        </span>
+        <span class="link-container">
+          <a class="link" href="/data-dictionary">Diccionario de Datos</a>
+        </span>
+      </div>
+
+      <div class="grid-container">
+        <app-option [imageSource]="imageSource" [option]="template" *ngFor="let template of templates"></app-option>
+    </div>
+    </div>
+
+
+</app-sidenav>
