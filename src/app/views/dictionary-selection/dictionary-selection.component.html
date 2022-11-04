@@ -1,7 +1,9 @@
 <app-toolbar></app-toolbar>
 
 <app-sidenav-builder>
-  <div class="controls">
+
+  <div class="controls d-flex justify-content-between">
+    <app-return-button [href]="'/admin-home'"></app-return-button>
     <button id="add-item" (click)="goToDictionaryBuilder()">
       &plus;
     </button>
@@ -10,6 +12,6 @@
         <app-option [imageSource]="imageSource" [option]="dictionary" *ngFor="let dictionary of dictionaries">
 
         </app-option>
-    </div>
+  </div>
 
 </app-sidenav-builder>
