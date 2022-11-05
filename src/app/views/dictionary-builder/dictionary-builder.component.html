@@ -33,15 +33,12 @@
       <div class="d-flex justify-content-evenly h-75">
 
         <div class="row h-75 w-50 mt-3">
-          <div class="card container rounded py-3 px-3 w-75">
-            <div class="column-name text-white rounded-pill py-2 my-1 ps-4">
-              Nombre de columna
-            </div>
-            <div class="column-name text-white rounded-pill py-2 my-1 ps-4">
-              Nombre de columna
-            </div>
-            <div class="column-name text-white rounded-pill py-2 my-1 ps-4">
-              Nombre de columna
+          <div class="card container rounded py-3 px-3 w-75 mh-100 overflow-auto">
+            <div class="column-name text-white rounded-pill py-2 my-2 ps-4"
+                  *ngFor="let table_name of table; let idx = index"
+                  (click)="tableToTokens(idx)"
+              >
+                  {{table_name}}
             </div>
           </div>
         </div>
@@ -49,36 +46,27 @@
         <div class="d-flex align-items-center">
           <div class="d-flex flex-column justify-content-around">
             <div class="mb-5">
-              <button class="fs-3 rounded-pill px-3 text-black">&rarr;</button>
-            </div>
-            <div class="mt-5">
-              <button class="fs-3 rounded-pill px-3">&larr;</button>
+              <div class="fs-1 rounded-pill px-3 text-white">&rarr;</div>
             </div>
           </div>
         </div>
 
-        <div class="row h-75 w-50 mt-3">
-          <div class="card container rounded py-3 px-3 w-75">
-            <div class="column-name text-white rounded py-3 my-1 d-flex px-2
+        <div class="row h-75 w-50 mw-100 mt-3">
+          <div class="card container rounded py-3 px-3 w-75 mh-100 overflow-auto">
+            <div class="token-container text-white rounded py-3 my-1 d-flex px-2
                         d-flex flex-column"
+                  *ngFor="let token of tokens; let idx = index"
             >
-              <div class="rounded-pill bg-secondary w-50 ps-4 mb-1 text-break">
-                Nombre de columna
+              <div class="d-flex justify-content-between">
+                <div class="rounded-pill bg-secondary w-50 ps-4 mb-1 text-break">
+                  {{token}}
+                </div>
+                <button type="button" class="btn-close btn-close-white"
+                        aria-label="Close" (click)="tokensToTable(idx)"
+                ></button>
               </div>
               <div class="mt-1">
                 <input class="rounded-pill w-100" type="text">
-              </div>
-            </div>
-
-            <div id="backdrop" class="column-name text-white rounded py-3 my-1
-                        d-flex px-2 d-flex flex-column"
-            >
-              <div class="rounded-pill bg-white text-black w-50 ps-4 mb-1">
-                Nombre de columna
-              </div>
-              <div class="mt-1">
-                <input class="rounded-pill w-100" type="text" value="random"
-                      readonly>
               </div>
             </div>
           </div>
