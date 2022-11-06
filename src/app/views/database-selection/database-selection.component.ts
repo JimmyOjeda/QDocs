@@ -39,7 +39,7 @@ export class DatabaseSelectionComponent implements OnInit {
         port: "8080",
         user: "user1",
         password: "password1"
-      
+
     },
     {
         name: "BD2",
@@ -47,7 +47,7 @@ export class DatabaseSelectionComponent implements OnInit {
         port: "8080",
         user: "user1",
         password: "password1"
-      
+
     },
     {
         name: "BD3",
@@ -55,7 +55,7 @@ export class DatabaseSelectionComponent implements OnInit {
         port: "8080",
         user: "user1",
         password: "password1"
-      
+
     },
     {
         name: "BD4",
@@ -63,7 +63,7 @@ export class DatabaseSelectionComponent implements OnInit {
         port: "8080",
         user: "user1",
         password: "password1"
-      
+
     },
     {
         name: "BD5",
@@ -71,7 +71,7 @@ export class DatabaseSelectionComponent implements OnInit {
         port: "8080",
         user: "user1",
         password: "password1"
-      
+
     }
   ]
 
@@ -91,7 +91,7 @@ export class DatabaseSelectionComponent implements OnInit {
   }
 
   loadDatabaseData (id: number) {
-    
+
     this.lastOptionOpened = id-1;
     let myId = id;
 

@@ -6,32 +6,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dictionary-builder.component.css']
 })
 export class DictionaryBuilderComponent implements OnInit {
-  table = [
-    "Id",
-    "Nombre",
-    "Dirección",
-    "Teléfono",
-    "Escuela",
-    "Apodo",
-    "Edad"
-  ];
 
-  // tempArray: any = [];
-  tokens: any = [];
+    dictionaryName = ""
+    databases = [
+        "BD 01",
+        "BD 02",
+        "BD 03",
+        "BD 04"
+    ]
+    tables = [
+        "Tabla 01",
+        "Tabla 02",
+        "Tabla 03",
+        "Tabla 04"
+    ]
+    columns = [
+        "Id",
+        "Nombre",
+        "Dirección",
+        "Teléfono",
+        "Escuela",
+        "Apodo",
+        "Edad"
+    ];
+    tokens: any = [];
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  tableToTokens(index: number) {
-    this.tokens.push(this.table[index]);
-    this.table = this.table.filter(item => item !== this.table[index] )
-  }
+    columnsToTokens(index: number) {
+        let column = this.columns[index];
+        let newToken = {
+        name: column,
+        value: ""
+        };
+        this.tokens.push(newToken);
+        this.columns = this.columns.filter(item => item !== column);
+    }
 
-  tokensToTable(index: number) {
-    this.table.push(this.tokens[index]);
-    this.tokens = this.tokens.filter((item: any) => item !== this.tokens[index]);
-  }
+    tokensToColumns(index: number) {
+        let column = this.tokens[index];
+        this.columns.push(column);
+        this.tokens = this.tokens.filter((item: any) => item !== column);
+    }
+
+    sendTokens() {
+        console.log(`Nombre diccionario ${this.dictionaryName}`);
+        console.log(this.tokens);
+    }
 
 }
