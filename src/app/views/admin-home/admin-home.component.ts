@@ -11,12 +11,12 @@ export class AdminHomeComponent implements OnInit {
     {
       "ImageSource" : "../assets/Images/basededatos.png",
       "Title" : "Bases de datos",
-      "Link" : "database-selection"
+      "Link" : "/database-selection"
     },
     {
       "ImageSource" : "../assets/Images/diccionario.png",
       "Title" : "Diccionario",
-      "Link" : "dictionary-selection"
+      "Link" : "/dictionary-selection"
       }
   ]
 

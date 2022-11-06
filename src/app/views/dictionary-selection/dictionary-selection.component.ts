@@ -38,8 +38,4 @@ export class DictionarySelectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToDictionaryBuilder(): void {
-    this.router.navigateByUrl('/dictionary-builder');
-  }
-
 }

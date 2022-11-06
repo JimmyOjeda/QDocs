@@ -1,0 +1,10 @@
+.remove-item {
+    font-size: 2vw;
+    height: 6vh;
+    width: 6vh;
+    border-radius: 50px;
+    background-color: #222831;
+    color: white;
+    margin-top: 0vh;
+    float: right;
+}

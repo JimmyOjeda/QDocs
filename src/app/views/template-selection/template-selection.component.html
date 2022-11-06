@@ -2,7 +2,7 @@
 
 <app-sidenav-builder>
   <div class="controls">
-    <button class="link-container" (click)="goToTemplateSelection()">
+    <button class="link-container" routerLink="/data-dictionary">
         <a class="link">Diccionario de Datos</a>
     </button>
     <app-add-button (click)="createTemplateConfiguration()">
@@ -10,19 +10,19 @@
     </app-add-button>
   </div>
   <div class="grid-container">
-    <app-option 
+    <app-removable-option 
       [imageSource]="imageSource" 
       [option]="template" 
       data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
+      data-bs-target="#add-modal"
       (click)="loadTemplateData(template.id)"
       *ngFor="let template of templates">
     
-    </app-option>
+    </app-removable-option>
   </div>
 </app-sidenav-builder>
 
-<app-modal>
+<app-modal [modalId]="'add-modal'">
   <div class="header">
     <h2 class="modal-title" id="exampleModalLabel">
         {{modalTitle}} 
@@ -42,11 +42,39 @@
   </div>
   <div class="footer">
     <div class="save-button">
-        <button type="button" [disabled]="templateForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveTemplateConfiguration()">
-            <strong>
-                Guardar
-            </strong>
-        </button>
+      <button type="button" [disabled]="templateForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="selectOptionService.optionSelected != -1 ; else addButton" (click)="saveTemplateConfiguration()">
+          <strong>
+              Guardar
+          </strong>
+      </button>
+      <ng-template #addButton>
+          <button type="button" [disabled]="templateForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTemplateConfiguration()">
+              <strong>
+                  Crear
+              </strong>
+          </button>
+      </ng-template>
     </div>
+  </div>
+</app-modal>
+
+<app-modal [modalId]="'remove-modal'">
+  <div class="header">
+      <h2 class="modal-title" id="exampleModalLabel">
+          Eliminar conexión
+      </h2>
+  </div>
+  <div class="body">
+      ¿Estás seguro de eliminar?
+  </div>
+  <hr>
+  <div class="footer">
+      <div class="save-button">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeTemplateConfiguration()">
+              <strong>
+                  Eliminar
+              </strong>
+          </button>
+      </div>
   </div>
 </app-modal>

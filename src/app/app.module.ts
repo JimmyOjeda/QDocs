@@ -28,6 +28,7 @@ import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view
 import { ReturnButtonComponent } from './components/return-button/return-button.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
+import { RemovableOptionComponent } from './components/removable-option/removable-option.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { RemoveButtonComponent } from './components/remove-button/remove-button.
     DictionaryViewComponent,
     ReturnButtonComponent,
     ModalComponent,
-    RemoveButtonComponent
+    RemoveButtonComponent,
+    RemovableOptionComponent
   ],
   imports: [
     BrowserModule,

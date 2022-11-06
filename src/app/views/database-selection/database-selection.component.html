@@ -7,21 +7,21 @@
         </app-add-button>
     </div>
     <div class="grid-container">
-        <app-option
+        <app-removable-option
             [imageSource]="imageSource"
             [option]="database"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#add-modal"
             (click)="loadDatabaseData(database.id)"
-            *ngFor="let database of databases" >
-
-        </app-option>
+            *ngFor="let database of manageDatabasesService.readAllDatabases()" >
+            <app-remove-button></app-remove-button>
+        </app-removable-option>
     </div>
 
 </app-sidenav-builder>
 
 
-<app-modal>
+<app-modal [modalId]="'add-modal'">
     <div class="header">
         <h2 class="modal-title" id="exampleModalLabel">
             {{modalTitle}} 
@@ -54,9 +54,37 @@
     <hr>
     <div class="footer">
         <div class="save-button">
-            <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveDatabaseConfiguration()">
+            <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="selectOptionService.optionSelected != -1 ; else addButton" (click)="saveDatabaseConfiguration()">
                 <strong>
                     Guardar
+                </strong>
+            </button>
+            <ng-template #addButton>
+                <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="addDatabaseConfiguration()">
+                    <strong>
+                        Crear
+                    </strong>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</app-modal>
+
+<app-modal [modalId]="'remove-modal'">
+    <div class="header">
+        <h2 class="modal-title" id="exampleModalLabel">
+            Eliminar conexión
+        </h2>
+    </div>
+    <div class="body">
+        ¿Estás seguro de eliminar?
+    </div>
+    <hr>
+    <div class="footer">
+        <div class="save-button">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeDatabaseConfiguration()">
+                <strong>
+                    Eliminar
                 </strong>
             </button>
         </div>

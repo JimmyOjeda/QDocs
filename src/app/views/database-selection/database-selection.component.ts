@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
+import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
 @Component({
   selector: 'app-database-selection',
@@ -9,71 +11,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class DatabaseSelectionComponent implements OnInit {
 
   imageSource = "../assets/Images/basededatosblack.png";
-  databases = [
-    {
-      "id": 1,
-      "title" : "Base de datos 01"
-    },
-    {
-      "id": 2,
-      "title" : "Base de datos 02"
-    },
-    {
-      "id": 3,
-      "title" : "Base de datos 03"
-    },
-    {
-      "id": 4,
-      "title" : "Base de datos 04"
-    },
-    {
-      "id": 5,
-      "title" : "Base de datos 05"
-    }
-  ];
-
-  data = [
-    {
-        name: "BD1",
-        direction: "192",
-        port: "8080",
-        user: "user1",
-        password: "password1"
-      
-    },
-    {
-        name: "BD2",
-        direction: "192",
-        port: "8080",
-        user: "user1",
-        password: "password1"
-      
-    },
-    {
-        name: "BD3",
-        direction: "192",
-        port: "8080",
-        user: "user1",
-        password: "password1"
-      
-    },
-    {
-        name: "BD4",
-        direction: "192",
-        port: "8080",
-        user: "user1",
-        password: "password1"
-      
-    },
-    {
-        name: "BD5",
-        direction: "192",
-        port: "8080",
-        user: "user1",
-        password: "password1"
-      
-    }
-  ]
 
   databaseForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -86,38 +23,63 @@ export class DatabaseSelectionComponent implements OnInit {
   lastOptionOpened: number = 0;
   modalTitle: string = "Crear conexión";
 
-  constructor() { }
+  constructor(
+    public selectOptionService: SelectOptionService,
+    public manageDatabasesService: ManageDatabasesService
+  ) { }
 
   ngOnInit(): void {
   }
 
   createDatabaseConfiguration () {
+    this.selectOptionService.optionSelected = -1;
     this.modalTitle = "Crear conexión";
     this.databaseForm.reset();
   }
 
   loadDatabaseData (id: number) {
     this.modalTitle = "Editar conexión";
-    this.lastOptionOpened = id-1;
-    let myId = id;
-
-    this.databaseForm.patchValue({
-      name: this.data[id-1].name,
-      direction: this.data[id-1].direction,
-      port: this.data[id-1].port,
-      user: this.data[id-1].user,
-      password: this.data[id-1].password
-    })
+    let database = this.manageDatabasesService.readDatabase(id);
+    
+    if(database){
+      this.databaseForm.patchValue({
+        name: database.name,
+        direction: database.direction,
+        port: database.port,
+        user: database.user,
+        password: database.password
+      })
+    }else{
+      this.databaseForm.reset();
+    }
   }
 
   saveDatabaseConfiguration() {
-    this.data[this.lastOptionOpened] = {
+    let database = {
+      id: this.selectOptionService.optionSelected,
       name: this.databaseForm.value.name!,
       direction: this.databaseForm.value.direction!,
       port: this.databaseForm.value.port!,
       user: this.databaseForm.value.user!,
       password: this.databaseForm.value.password!
     }
+    this.manageDatabasesService.updateDatabase(database);
+  }
+
+  addDatabaseConfiguration() {
+    this.manageDatabasesService.createDatabase({
+      id: this.manageDatabasesService.readAllDatabases.length+1,
+      name: this.databaseForm.value.name!,
+      direction: this.databaseForm.value.direction!,
+      port: this.databaseForm.value.port!,
+      user: this.databaseForm.value.user!,
+      password: this.databaseForm.value.password!
+    });
+    
+  }
+
+  removeDatabaseConfiguration () {
+    this.manageDatabasesService.deleteDatabase(this.selectOptionService.optionSelected);    
   }
 
 }

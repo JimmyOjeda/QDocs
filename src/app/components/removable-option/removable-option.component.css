@@ -26,3 +26,15 @@ h2 {
 }
 
 a:link { text-decoration: none; }
+
+.content-container {
+  width: 100%;
+}
+
+.remove-button {
+  float: right;
+}
+
+.item-image {
+  margin-left: 15%;
+}
