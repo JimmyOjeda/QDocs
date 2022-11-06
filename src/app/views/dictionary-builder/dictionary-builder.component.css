@@ -1,6 +1,7 @@
 .column-name {
   background-color: #222831;
   width: 95%;
+  cursor: pointer
 }
 
 .column-name:hover {

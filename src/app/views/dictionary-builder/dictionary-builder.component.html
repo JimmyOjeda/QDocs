@@ -2,96 +2,105 @@
 
 <app-sidenav-builder>
 
-  <div class="container h-100">
-    <div class="container h-75 mt-3">
+    <div class="container h-100">
+        <div class="container h-75 mt-3">
 
-      <div class="row align-items-center h-20">
-        <div class="module-header">
-          <app-return-button [href]="'/dictionary-selection'"></app-return-button>
-          <div class="module-header-text">
-            <h3>Crear diccionario de datos</h3>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-center my-2">
-          <div class="d-flex flex-column align-items-center w-25">
-            <label for="dictonary_name" class=" text-white me-3">
-                Nombre del diccionario:
-            </label>
-            <input name="dictonary_name" placeholder="Nombre" type="text"
-                    class="rounded-pill align-items-center w-100 text-center"
-                    [(ngModel)]="dictionaryName"
-            >
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-around">
-          <select class="w-25 dropdown rounded-pill fw-bold" name="" id="">
-            <option *ngFor="let database of databases">{{database}}</option>
-          </select>
-
-          <select class="w-25 dropdown rounded-pill fw-bold" name="" id="">
-            <option *ngFor="let table of tables">{{table}}</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-evenly h-50 my-3">
-
-        <div class="row h-100 w-50">
-          <div class="card container rounded py-3 px-3 w-75 mh-100 overflow-auto">
-            <div class="column-name text-white rounded-pill py-2 my-2 ps-4
-                        cursor-pointer"
-                  *ngFor="let column of columns; let idx = index"
-                  (click)="columnsToTokens(idx)"
-              >
-                  {{column}}
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center">
-          <div class="d-flex flex-column justify-content-around">
-            <div class="mb-5">
-              <div class="fs-1 rounded-pill px-3 text-white">&rarr;</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row h-100 w-50">
-            <div class="card container rounded py-3 px-3 w-75 mh-100 overflow-auto">
-                <div id="token-container"
-                    class="token-container text-white rounded py-3 my-1 d-flex
-                            px-2 d-flex flex-column"
-                    *ngFor="let token of tokens; let idx = index"
-                >
-                    <div class="d-flex justify-content-between">
-                <div class="rounded-pill bg-secondary w-50 ps-4 mb-1 text-break">
-                  {{token.name}}
-                </div>
-                <button type="button" class="btn-close btn-close-white"
-                aria-label="Close" (click)="tokensToColumns(idx)"
-                ></button>
+            <div class="row align-items-center h-20">
+                <div class="module-header">
+                    <app-return-button [href]="'/dictionary-selection'"></app-return-button>
+                    <div class="module-header-text">
+                        <h3>Crear diccionario de datos</h3>
                     </div>
-                    <div class="mt-1">
-                        <input class="rounded-pill w-100" type="text" required
-                                [(ngModel)]="token.value"
+                </div>
+
+                <div class="d-flex justify-content-center my-2">
+                    <div class="d-flex flex-column align-items-center w-25">
+                        <label for="dictonary_name" class=" text-white me-3">
+                            Nombre del diccionario: </label>
+                        <input name="dictonary_name" placeholder="Nombre"
+                                class="rounded-pill align-items-center w-100
+                                        text-center" type="text"
+                                [(ngModel)]="dictionaryName"
                         >
                     </div>
                 </div>
+
+                <div class="d-flex justify-content-around">
+                    <select class="w-25 dropdown rounded-pill fw-bold">
+                        <option *ngFor="let database of databases">
+                            {{database}}
+                        </option>
+                    </select>
+
+                    <select class="w-25 dropdown rounded-pill fw-bold">
+                        <option *ngFor="let table of tables">
+                            {{table}}
+                        </option>
+                    </select>
+                </div>
             </div>
+
+            <div class="d-flex justify-content-evenly h-50 my-3">
+
+                <div class="row h-100 w-50">
+                    <div class="card container rounded py-3 px-3 w-75 mh-100
+                                overflow-auto"
+                    >
+                        <div class="column-name text-white rounded-pill py-2
+                                    my-2 ps-4"
+                            *ngFor="let column of columns; let idx = index"
+                            (click)="columnsToTokens(idx)"
+                        >
+                            {{column}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <span class="fs-1 rounded-pill px-3 text-white">
+                        &rarr;
+                    </span>
+                </div>
+
+                <div class="row h-100 w-50">
+                    <div class="card container rounded py-3 px-3 w-75 mh-100
+                                overflow-auto"
+                    >
+                        <div id="token-container"
+                            class="token-container text-white rounded py-3 my-1
+                                d-flex px-2 d-flex flex-column"
+                            *ngFor="let token of tokens; let idx = index"
+                        >
+                            <div class="d-flex justify-content-between">
+                                <div class="rounded-pill bg-secondary w-50 ps-4
+                                            mb-1 text-break"
+                                >
+                                    {{token.name}}
+                                </div>
+                                <button class="btn-close btn-close-white"
+                                aria-label="Close" (click)="tokensToColumns(idx)"
+                                ></button>
+                            </div>
+                            <div class="mt-1">
+                                <input class="rounded-pill w-100 token-value"
+                                        type="text" [(ngModel)]="token.value"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button class="btn bg-white fs-4 rounded-pill px-5 py-0
+                                mt-3"
+                        (click)="sendTokens()"
+                >
+                Guardar</button>
+            </div>
+
         </div>
-
-      </div>
-
-      <div class="d-flex justify-content-center">
-        <button class="btn bg-white fs-4 rounded-pill px-5 py-0 mt-3"
-                (click)="sendTokens()"
-        >
-            Guardar</button>
-      </div>
-
     </div>
-  </div>
 
 </app-sidenav-builder>

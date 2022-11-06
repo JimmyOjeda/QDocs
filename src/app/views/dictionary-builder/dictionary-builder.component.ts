@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dictionary-builder',
@@ -53,8 +53,11 @@ export class DictionaryBuilderComponent implements OnInit {
     }
 
     sendTokens() {
-        console.log(`Nombre diccionario ${this.dictionaryName}`);
-        console.log(this.tokens);
+        const dictionaryTokens = {
+            "dictionaryName": this.dictionaryName,
+            "tokens": this.tokens
+        };
+        console.log(dictionaryTokens);
     }
 
 }
