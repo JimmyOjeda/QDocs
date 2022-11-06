@@ -3,7 +3,7 @@
 <app-sidenav-builder>
 
     <div class="container h-100">
-        <div class="container h-75 mt-3">
+        <form [formGroup]="DictionaryForm" class="container h-75 mt-3">
 
             <div class="row align-items-center h-20">
                 <div class="module-header">
@@ -15,12 +15,14 @@
 
                 <div class="d-flex justify-content-center my-2">
                     <div class="d-flex flex-column align-items-center w-25">
-                        <label for="dictonary_name" class=" text-white me-3">
+                        <label for="dictonary_name" class="text-white me-3">
                             Nombre del diccionario: </label>
-                        <input name="dictonary_name" placeholder="Nombre"
-                                class="rounded-pill align-items-center w-100
-                                        text-center" type="text"
-                                [(ngModel)]="dictionaryName"
+                        <input name="dictonary_name" placeholder="Mi diccionario"
+                                class=" form-control" type="text"
+                                formControlName="dictionaryName"
+                                [class.is-invalid]="DictionaryForm.get(
+                                        'dictionaryName'
+                                    ).invalid && this.tokens.length > 0"
                         >
                     </div>
                 </div>
@@ -65,26 +67,40 @@
                 <div class="row h-100 w-50">
                     <div class="card container rounded py-3 px-3 w-75 mh-100
                                 overflow-auto"
+                        formArrayName="tokens"
                     >
                         <div id="token-container"
                             class="token-container text-white rounded py-3 my-1
                                 d-flex px-2 d-flex flex-column"
-                            *ngFor="let token of tokens; let idx = index"
+                            *ngFor="let token of getCtrl(
+                                        'tokens', DictionaryForm
+                                    ).controls; let idx = index"
                         >
-                            <div class="d-flex justify-content-between">
-                                <div class="rounded-pill bg-secondary w-50 ps-4
-                                            mb-1 text-break"
-                                >
-                                    {{token.name}}
+                            <div [formGroupName]="idx">
+                                <div class="d-flex justify-content-between">
+                                    <div class="rounded-pill bg-secondary w-50
+                                                ps-4 mb-1 text-break"
+                                    >
+                                        {{tokens[idx].name}}
+                                    </div>
+                                    <button class="btn-close btn-close-white"
+                                            aria-label="Close"
+                                            (click)="removeToken(idx)"
+                                    ></button>
                                 </div>
-                                <button class="btn-close btn-close-white"
-                                aria-label="Close" (click)="tokensToColumns(idx)"
-                                ></button>
-                            </div>
-                            <div class="mt-1">
-                                <input class="rounded-pill w-100 token-value"
-                                        type="text" [(ngModel)]="token.value"
-                                >
+                                <div class="mt-1">
+                                    <input class="rounded-pill w-100 token-value
+                                                form-control"
+                                            type="text"
+                                            formControlName="token"
+                                            [class.is-invalid]="getCtrl(
+                                                'tokens', DictionaryForm
+                                            ).controls[idx].touched
+                                            && getCtrl(
+                                                'tokens', DictionaryForm
+                                            ).controls[idx].invalid"
+                                    >
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,14 +109,31 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <button class="btn bg-white fs-4 rounded-pill px-5 py-0
-                                mt-3"
-                        (click)="sendTokens()"
-                >
-                Guardar</button>
+                <div class="d-flex flex-column">
+                    <label class="text-danger" *ngIf="getCtrl(
+                            'dictionaryName', DictionaryForm
+                        ).status != 'VALID' && this.tokens.length > 0"
+                    >
+                        &#9432; Por favor escribe el nombre del diccionario
+                    </label>
+                    <label class="text-danger" *ngIf="getCtrl(
+                            'tokens', DictionaryForm
+                        ).status != 'VALID' && this.tokens.length > 0"
+                    >
+                        &#9432; Asegúrate de rellenar todos los campos
+                    </label>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn bg-white fs-4 rounded-pill px-5 py-0
+                                        mt-3"
+                                (click)="sendTokens()"
+                                [disabled]="DictionaryForm.status != 'VALID'"
+                        >
+                        Guardar</button>
+                    </div>
+                </div>
             </div>
 
-        </div>
+        </form>
     </div>
 
 </app-sidenav-builder>
