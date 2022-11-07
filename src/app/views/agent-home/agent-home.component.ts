@@ -15,8 +15,8 @@ export class AgentHomeComponent implements OnInit {
     },
     {
       "ImageSource" : "../assets/Images/documento.png",
-      "Title" : "Documento",
-      "Link" : "enlace_documento.php"
+      "Title" : "Generar documentos",
+      "Link" : "/generate-docs"
       }
   ]
 

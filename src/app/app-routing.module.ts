@@ -4,6 +4,8 @@ import { AdminHomeComponent } from './views/admin-home/admin-home.component';
 import { AgentHomeComponent } from './views/agent-home/agent-home.component';
 import { DatabaseSelectionComponent } from './views/database-selection/database-selection.component';
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/generate-docs-complete.component';
+import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'data-dictionary',
     component: DictionaryViewComponent
+  },
+  {
+    path: 'generate-docs',
+    component: GenerateDocsWizardComponent
+  },
+  {
+    path: 'docs-complete',
+    component: GenerateDocsCompleteComponent
   },
   {
     path: '**',

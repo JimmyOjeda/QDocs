@@ -9,6 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContentComponent } from './components/content/content.component';
@@ -20,6 +23,15 @@ import { OptionComponent } from './components/option/option.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
 import { ReturnButtonComponent } from './components/return-button/return-button.component';
+import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
+import { StepsComponent } from './components/steps/steps.component';
+import { StepTemplateComponent } from './components/step-template/step-template.component';
+import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/generate-docs-complete.component';
+import { TemplateWizardComponent } from './components/template-wizard/template-wizard.component';
+import { WizardOptionComponent } from './components/wizard-option/wizard-option.component';
+import { WizardService } from './services/wizard/wizard.service';
+import { RecordWizardComponent } from './components/record-wizard/record-wizard.component';
+import { SummaryWizardComponent } from './components/summary-wizard/summary-wizard.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +46,15 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
     OptionComponent,
     TemplateSelectionComponent,
     DictionaryViewComponent,
-    ReturnButtonComponent
+    ReturnButtonComponent,
+    GenerateDocsWizardComponent,
+    StepsComponent,
+    StepTemplateComponent,
+    GenerateDocsCompleteComponent,
+    TemplateWizardComponent,
+    WizardOptionComponent,
+    RecordWizardComponent,
+    SummaryWizardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +64,11 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [WizardService, MatFormField],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
