@@ -17,7 +17,7 @@ export class RemovableOptionComponent implements OnInit {
   }
 
   updateSelectedOption () {
-    this.selectOptionService.updateOptionSelected(this.option.id);
+    this.selectOptionService.updateSelectedOption(this.option.id);
   }
 
 }

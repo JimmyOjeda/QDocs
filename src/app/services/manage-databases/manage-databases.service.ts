@@ -44,7 +44,6 @@ export class ManageDatabasesService {
   updateDatabase (database: Database) { 
     let oldDatabase = this.databases.find(aDatabase => aDatabase.id === database.id)!;
     this.databases[this.databases.indexOf(oldDatabase)] = database;
-    console.log(this.databases);
   }
 
   deleteDatabase (id: number) {

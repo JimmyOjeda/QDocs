@@ -9,7 +9,7 @@ export class SelectOptionService {
 
   constructor() { }
 
-  updateOptionSelected (optionSelected: number) {
+  updateSelectedOption (optionSelected: number) {
     this.optionSelected = optionSelected;
   }
 

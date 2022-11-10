@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ManageTemplatesService } from 'src/app/services/manage-templates/manage-templates.service';
 import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
 @Component({
@@ -11,83 +12,92 @@ import { SelectOptionService } from 'src/app/services/select-option/select-optio
 export class TemplateSelectionComponent implements OnInit {
 
   imageSource = "../assets/Images/plantillas-black.png";
-  templates = [
-    {
-      id : 1,
-      name : "Plantilla 1",
-      link : "enlace"
-    },
-    {
-      id : 2,
-      name : "Plantilla 2",
-      link : "enlace"
-    },
-    {
-      id : 3,
-      name : "Plantilla 3",
-      link : "enlace"
-    },
-    {
-      id : 4,
-      name : "Plantilla 4",
-      link : "enlace"
-    },
-    {
-      id : 5,
-      name : "Plantilla 5",
-      link : "enlace"
-    }
-  ];
 
   templateForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    template: new FormControl('', Validators.required)
+    file: new FormControl('', Validators.required),
+    filename: new FormControl('', Validators.required),
+    fileSource: new FormControl('', Validators.required)
   });
 
-  lastOptionOpened: number = 0;
   modalTitle: string = "Crear plantilla";
 
-  constructor(private router: Router, public selectOptionService: SelectOptionService) { }
+  constructor(
+    public selectOptionService: SelectOptionService,
+    public manageTemplatesService: ManageTemplatesService  
+  ) { }
 
   ngOnInit(): void {
   }
 
-  createTemplateConfiguration () {
+  prepareModalForNewTemplate () {
     this.modalTitle = "Crear plantilla";
     this.templateForm.reset();
+    this.selectOptionService.updateSelectedOption(-1);
   }
 
   loadTemplateData (id: number) {
     this.modalTitle = "Editar plantilla";
-    this.lastOptionOpened = id-1;
-    let template = this.templates.find(template => template.id === id)!;
+    this.templateForm.reset();
+    let template = this.manageTemplatesService.readTemplate(id);
 
-    this.templateForm.patchValue({
-      name: template.name
-    })
+    if (template) {
+      this.templateForm.patchValue({
+        name: template.name,
+        filename: template.filename
+      })
+    }   
   }
 
   saveTemplateConfiguration () {
-    let template = this.templates.find(template => template.id === this.selectOptionService.optionSelected)!;
-    let index = this.templates.indexOf(template);
-
-    this.templates[index].name = this.templateForm.value.name!;
-    this.templates[index].link = this.templateForm.value.template!;
-
-  }
-
-  removeTemplateConfiguration () {
-    let template = this.templates.find(template => template.id === this.selectOptionService.optionSelected)!;
-    this.templates.splice(this.templates.indexOf(template),1);
+    let template = {
+      id : this.selectOptionService.optionSelected,
+      name : this.templateForm.value.name,
+      file : this.templateForm.value.file,
+      filename : this.templateForm.value.filename,
+      fileSource : this.templateForm.value.fileSource
+    }
+    this.manageTemplatesService.updateTemplate(template);
   }
 
   addTemplateConfiguration () {
-    let newTemplateConfiguration = {
-      id: this.templates.length+1,
-      name: this.templateForm.value.name!,
-      link : "enlace"
-    };
-    this.templates.push(newTemplateConfiguration);
+    this.manageTemplatesService.createTemplate({
+      id: this.manageTemplatesService.readAllTemplates.length+1,
+      name: this.templateForm.value.name,
+      file : this.templateForm.value.file,
+      filename: this.templateForm.value.filename,
+      fileSource : "enlace"
+    });
+  }
+
+  removeTemplateConfiguration () {
+    this.manageTemplatesService.deleteTemplate(this.selectOptionService.optionSelected);
+  }
+
+  onFileChange(event: any) {
+    if (event?.target?.files.length > 0) {
+      const file = event.target.files[0];
+      this.templateForm.patchValue({
+        filename: file.name,
+        fileSource: file
+      });
+      console.log(file);
+      console.log(file.name);
+    }
+    
+  }
+
+  submit(){
+    const formData = new FormData();
+    formData.append('file', this.templateForm.get('fileSource')?.value!);
+   
+    /*
+    this.http.post('http://localhost:8001/upload.php', formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('Uploaded Successfully.');
+      })
+      */
   }
 
 }

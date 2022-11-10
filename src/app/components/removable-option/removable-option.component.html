@@ -1,4 +1,4 @@
-<button type="button" class="option-container grid-item">
+<button type="button" class="option-container grid-item" (click)="updateSelectedOption()">
     <div class="content-container">
         <app-remove-button class="remove-button" (click)="updateSelectedOption()"></app-remove-button>
         <img class="item-image" src="{{imageSource}}" alt="{{option.name}} Image">
