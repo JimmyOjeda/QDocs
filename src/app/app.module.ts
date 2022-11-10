@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContentComponent } from './components/content/content.component';
@@ -23,13 +27,21 @@ import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionar
 import { ContentButtonComponent } from './components/content-button/content-button.component';
 import { SidenavBuilderComponent } from './components/sidenav-builder/sidenav-builder.component';
 import { AddButtonComponent } from './components/add-button/add-button.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
 import { ReturnButtonComponent } from './components/return-button/return-button.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
 import { RemovableOptionComponent } from './components/removable-option/removable-option.component';
+import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
+import { StepsComponent } from './components/steps/steps.component';
+import { StepTemplateComponent } from './components/step-template/step-template.component';
+import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/generate-docs-complete.component';
+import { TemplateWizardComponent } from './components/template-wizard/template-wizard.component';
+import { WizardOptionComponent } from './components/wizard-option/wizard-option.component';
+import { WizardService } from './services/wizard/wizard.service';
+import { RecordWizardComponent } from './components/record-wizard/record-wizard.component';
+import { SummaryWizardComponent } from './components/summary-wizard/summary-wizard.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +64,15 @@ import { RemovableOptionComponent } from './components/removable-option/removabl
     ReturnButtonComponent,
     ModalComponent,
     RemoveButtonComponent,
-    RemovableOptionComponent
+    RemovableOptionComponent,
+    GenerateDocsWizardComponent,
+    StepsComponent,
+    StepTemplateComponent,
+    GenerateDocsCompleteComponent,
+    TemplateWizardComponent,
+    WizardOptionComponent,
+    RecordWizardComponent,
+    SummaryWizardComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +84,11 @@ import { RemovableOptionComponent } from './components/removable-option/removabl
     MatIconModule,
     MatDividerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [WizardService, MatFormField],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

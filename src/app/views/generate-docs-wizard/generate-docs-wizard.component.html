@@ -1,0 +1,39 @@
+<app-toolbar [title]="'Generar Documentos'" ></app-toolbar>
+
+<app-sidenav>
+
+<div class="form-page-container">
+    <app-steps></app-steps>
+  <div class="step-page-container">
+    <div class="form-step">
+        <ng-container [ngSwitch]="(currentStep | async)?.stepIndex">
+
+            <ng-container *ngSwitchCase="'1'">
+                <app-step-template [step]="(currentStep | async)">
+                  <app-template-wizard (completedStep)="onCompletedStep($event)"></app-template-wizard>
+                </app-step-template>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'2'">
+              <app-step-template [step]="(currentStep | async)">
+                <app-record-wizard (completedStep)="onCompletedStep($event)" ></app-record-wizard>
+              </app-step-template>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'3'">
+              <app-step-template [step]="(currentStep | async)">
+                <app-summary-wizard></app-summary-wizard>
+              </app-step-template>
+            </ng-container>
+
+        </ng-container>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button (click)="onNextStep()" [disabled]="!(currentStep | async)?.isComplete && (currentStep | async)?.stepIndex !== 3" class="form-continue-btn">
+      {{ showButtonLabel() }}
+    </button>
+  </div>
+</div>
+
+</app-sidenav>

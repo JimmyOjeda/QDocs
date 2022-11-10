@@ -1,0 +1,29 @@
+.form-page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.step-page-container {
+    flex: 1;
+    margin: 0px 32px;
+}
+
+.form-continue-btn {
+    color: #222831;
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 1.15em;
+    cursor: pointer;
+    border: none !important;
+    margin: 32px;
+    max-width: 20%;
+    width: 100%;
+}
+
+.form-continue-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}

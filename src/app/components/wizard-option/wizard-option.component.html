@@ -1,0 +1,10 @@
+<button
+  class="option-container grid-item"
+  (click)="handleSelection()"
+  [ngClass]="{
+    'selected': isSelected
+  }"
+>
+  <img src="{{option.image}}" alt="{{option.title}} Image">
+  <p>{{option.title}}</p>
+</button>

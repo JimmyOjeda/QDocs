@@ -6,6 +6,8 @@ import { DatabaseSelectionComponent } from './views/database-selection/database-
 import { DictionaryBuilderComponent } from './views/dictionary-builder/dictionary-builder.component';
 import { DictionarySelectionComponent } from './views/dictionary-selection/dictionary-selection.component';
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
+import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/generate-docs-complete.component';
+import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
@@ -40,6 +42,14 @@ const routes: Routes = [
   {
     path: 'data-dictionary',
     component: DictionaryViewComponent
+  },
+  {
+    path: 'generate-docs',
+    component: GenerateDocsWizardComponent
+  },
+  {
+    path: 'docs-complete',
+    component: GenerateDocsCompleteComponent
   },
   {
     path: '**',

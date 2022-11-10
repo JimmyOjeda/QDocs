@@ -1,0 +1,39 @@
+.form-steps-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.step-bubble {
+  padding: 8px;
+  border: 3px solid white;
+  width: 6vh;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.step-divider {
+  height: 2px;
+  background: white;
+  flex: 1;
+  margin: 0px 10px;
+}
+
+.step-current, .step-complete {
+  background: white;
+  color: #222831;
+}
+
+.step-incomplete {
+  cursor: not-allowed;
+  pointer-events: none;
+}
