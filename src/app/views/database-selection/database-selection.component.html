@@ -2,7 +2,11 @@
 
 <app-sidenav-builder>
     <div class="controls">
-        <app-add-button (click)="createDatabaseConfiguration()">
+        <app-add-button 
+            data-bs-toggle="modal" 
+            data-bs-target="#add-modal" 
+            (click)="createDatabaseConfiguration()"
+        >
 
         </app-add-button>
     </div>

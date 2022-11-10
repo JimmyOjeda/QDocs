@@ -5,7 +5,7 @@ mat-sidenav-container {
 
 mat-sidenav {
   margin: 1vw;
-  width: 10vw;
+  width: 12vw;
   border-right: none;
   background: #222831;
   color: white;
@@ -23,7 +23,7 @@ mat-sidenav {
 }
 
 .menu-button mat-icon {
-  margin-right: 2vh;
+  margin-right: 3vh;
 }
 
 mat-divider {

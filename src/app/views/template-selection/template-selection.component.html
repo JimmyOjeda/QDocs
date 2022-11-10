@@ -5,8 +5,12 @@
     <button class="link-container" routerLink="/data-dictionary">
         <a class="link">Diccionario de Datos</a>
     </button>
-    <app-add-button (click)="prepareModalForNewTemplate()">
-
+    <app-add-button 
+      data-bs-toggle="modal" 
+      data-bs-target="#add-modal"
+      (click)="prepareModalForNewTemplate()"
+    >
+    
     </app-add-button>
   </div>
   <div class="grid-container">
