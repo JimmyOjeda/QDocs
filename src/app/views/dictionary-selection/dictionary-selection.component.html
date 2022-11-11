@@ -2,14 +2,9 @@
 
 <app-sidenav-builder>
   <div class="controls">
-    <app-add-button routerLink="/dictionary-builder">
-
-    </app-add-button>
   </div>
-  <div class="grid-container">
-        <app-option [imageSource]="imageSource" [option]="dictionary" *ngFor="let dictionary of dictionaries">
-
-        </app-option>
+  <div class="card" *ngIf="books">
+    {{books}}
   </div>
 
 </app-sidenav-builder>

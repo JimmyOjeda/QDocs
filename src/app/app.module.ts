@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -42,6 +43,7 @@ import { WizardOptionComponent } from './components/wizard-option/wizard-option.
 import { WizardService } from './services/wizard/wizard.service';
 import { RecordWizardComponent } from './components/record-wizard/record-wizard.component';
 import { SummaryWizardComponent } from './components/summary-wizard/summary-wizard.component';
+import { ManageBooksService } from './services/manage-books/manage-books.service';
 
 @NgModule({
   declarations: [
@@ -87,8 +89,9 @@ import { SummaryWizardComponent } from './components/summary-wizard/summary-wiza
     FormsModule,
     MatTableModule,
     MatInputModule,
+    HttpClientModule
   ],
-  providers: [WizardService, MatFormField],
+  providers: [WizardService, MatFormField, ManageBooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

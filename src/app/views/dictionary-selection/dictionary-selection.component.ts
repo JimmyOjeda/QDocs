@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ManageBooksService } from 'src/app/services/manage-books/manage-books.service';
 
 @Component({
   selector: 'app-dictionary-selection',
@@ -8,34 +8,20 @@ import { Router } from '@angular/router';
 })
 export class DictionarySelectionComponent implements OnInit {
 
-  imageSource = "../assets/Images/diccionarioblack.png";
+    imageSource = "../assets/Images/diccionarioblack.png";
 
-  dictionaries = [
-    {
-      "title" : "Diccionario 01",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 02",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 03",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 04",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 05",
-      "link" : "enlace"
+    private URL = "https://www.googleapis.com/books/v1/volumes?q=''";
+
+    books: Array<any>;
+
+    constructor(
+        public bookService: ManageBooksService
+    ) {}
+
+    ngOnInit(): void {
+        this.bookService.getBooks(this.URL).subscribe(data => {
+            console.log(data);
+        });
     }
-  ];
-
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-  }
 
 }
