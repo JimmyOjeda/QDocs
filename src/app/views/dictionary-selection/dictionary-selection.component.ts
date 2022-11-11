@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookModel } from 'src/app/models/BookModel';
 import { ManageBooksService } from 'src/app/services/manage-books/manage-books.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class DictionarySelectionComponent implements OnInit {
 
     private URL = "https://www.googleapis.com/books/v1/volumes?q=''";
 
-    books: Array<any>;
+    books: Array<BookModel>;
 
     constructor(
         public bookService: ManageBooksService
@@ -20,7 +21,8 @@ export class DictionarySelectionComponent implements OnInit {
 
     ngOnInit(): void {
         this.bookService.getBooks(this.URL).subscribe(data => {
-            console.log(data);
+            this.books = data.items;
+            console.log(this.books);
         });
     }
 
