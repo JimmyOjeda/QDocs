@@ -1,20 +1,21 @@
 <app-toolbar></app-toolbar>
 
 <app-sidenav-builder>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="books">
-            <div class="col" *ngFor="let book of books">
-                <div class="card w-50">
-                    <img [src]="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{book.volumeInfo.title}}</h5>
-                        <p class="card-text">{{book.volumeInfo.subtitle}}</p>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
+
+    <div class="container d-flex flex-column">
+        <div class="d-flex flex-row-reverse w-100 mt-5">
+            <app-add-button routerLink="/dictionary-builder"></app-add-button>
+        </div>
+
+        <div class="my-3">
+            <div class="row row-cols-3">
+                <div class="col" *ngFor="let dictionary of dictionaries">
+                    <app-option [imageSource]="imageSource"
+                        [option]="dictionary"></app-option>
                 </div>
             </div>
         </div>
     </div>
+
 </app-sidenav-builder>
+    

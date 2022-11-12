@@ -1,35 +1,38 @@
 <app-toolbar [title]="'Plantillas'" ></app-toolbar>
 
 <app-sidenav-builder>
-  <div class="controls">
-    <button class="link-container" routerLink="/data-dictionary">
-        <a class="link">Diccionario de Datos</a>
-    </button>
-    <app-add-button 
-      data-bs-toggle="modal" 
-      data-bs-target="#add-modal"
-      (click)="prepareModalForNewTemplate()"
-    >
-    
-    </app-add-button>
-  </div>
-  <div class="grid-container">
-    <app-removable-option 
-      [imageSource]="imageSource" 
-      [option]="template" 
-      data-bs-toggle="modal"
-      data-bs-target="#add-modal"
-      (click)="loadTemplateData(template.id)"
-      *ngFor="let template of manageTemplatesService.readAllTemplates()">
-    
-    </app-removable-option>
-  </div>
+    <div class="container d-flex flex-column">
+        <div class="d-flex flex-row-reverse w-100 mt-5">
+            <button class="link-container mx-2" routerLink="/data-dictionary">
+                <a class="link">Diccionario de Datos</a>
+            </button>
+            <app-add-button
+                data-bs-toggle="modal"
+                data-bs-target="#add-modal"
+                (click)="prepareModalForNewTemplate()"
+                class="mx-2"
+            >
+
+            </app-add-button>
+        </div>
+    </div>
+    <div class="grid-container">
+        <app-removable-option
+        [imageSource]="imageSource"
+        [option]="template"
+        data-bs-toggle="modal"
+        data-bs-target="#add-modal"
+        (click)="loadTemplateData(template.id)"
+        *ngFor="let template of manageTemplatesService.readAllTemplates()">
+
+        </app-removable-option>
+    </div>
 </app-sidenav-builder>
 
 <app-modal [modalId]="'add-modal'">
   <div class="header">
     <h2 class="modal-title" id="exampleModalLabel">
-        {{modalTitle}} 
+        {{modalTitle}}
     </h2>
   </div>
   <div class="body">
@@ -37,19 +40,19 @@
         <p class="field-title">
             Nombre:
         </p>
-        <input type="text" 
-          [class.is-invalid]="templateForm.get('name').touched && 
-          templateForm.get('name').invalid" 
-          class="form-control" 
+        <input type="text"
+          [class.is-invalid]="templateForm.get('name').touched &&
+          templateForm.get('name').invalid"
+          class="form-control"
           formControlName="name"
         >
         <p class="field-title">
             Archivo de plantilla:
         </p>
-        <input type="file" 
-            [class.is-invalid]="templateForm.get('file').touched && 
-            templateForm.get('file').invalid" 
-            class="form-control" 
+        <input type="file"
+            [class.is-invalid]="templateForm.get('file').touched &&
+            templateForm.get('file').invalid"
+            class="form-control"
             formControlName="file"
             (change)="onFileChange($event)"
         >
@@ -60,11 +63,11 @@
   </div>
   <div class="footer">
     <div class="save-button">
-      <button type="button" 
-        [disabled]="templateForm.invalid" 
-        class="btn btn-primary" 
-        data-bs-dismiss="modal" 
-        *ngIf="selectOptionService.optionSelected !== -1 ; else addButton" 
+      <button type="button"
+        [disabled]="templateForm.invalid"
+        class="btn btn-primary"
+        data-bs-dismiss="modal"
+        *ngIf="selectOptionService.optionSelected !== -1 ; else addButton"
         (click)="saveTemplateConfiguration()"
       >
         <strong>
@@ -72,10 +75,10 @@
         </strong>
       </button>
       <ng-template #addButton>
-        <button type="button" 
-          [disabled]="templateForm.invalid" 
-          class="btn btn-primary" 
-          data-bs-dismiss="modal" 
+        <button type="button"
+          [disabled]="templateForm.invalid"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
           (click)="addTemplateConfiguration()"
         >
           <strong>

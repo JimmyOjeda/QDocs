@@ -1,11 +1,15 @@
 .content {
-  height: 88vh;
-  margin: 1vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 10px;
+  min-height: 88vh;
   background-color: #222831;
+}
+
+.content::-webkit-scrollbar {
+    width: 10px;
+    background-color: #222831;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
+    border-right: 2px solid #222831;
 }
