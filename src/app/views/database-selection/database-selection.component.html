@@ -1,35 +1,40 @@
 <app-toolbar [title]="'Libros'"></app-toolbar>
 
 <app-sidenav-builder>
-    <div class="container py-4" *ngIf="books">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col" *ngFor="let book of books">
-                <div class="card h-100">
-                    <div class="d-flex justify-content-center">
-                        <img src="{{book.volumeInfo?.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}} Image" width="150vw">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{book.volumeInfo.title}}</h5>
-                        <p class="card-text">{{book.volumeInfo.subtitle}}</p>
-                        Autor:
-                        <b *ngFor="let author of book.volumeInfo.authors">
-                            {{author}}
-                        </b>
-                    </div>
-                    <div class="card-footer d-flex flex-column">
-                        <small class="text-muted">
-                            Fecha de publicación:
-                            {{book.volumeInfo.publishedDate}}
-                        </small>
-                        <div class="d-flex justify-content-between">
+    <div class="d-flex flex-column">
+        <div class="container my-3">
+            <app-return-button [href]="'/admin-home'"></app-return-button>
+        </div>
+        <div class="container py-4" *ngIf="books">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col" *ngFor="let book of books">
+                    <div class="card h-100">
+                        <div class="d-flex justify-content-center">
+                            <img src="{{book.volumeInfo?.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}} Image" width="150vw">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{book.volumeInfo.title}}</h5>
+                            <p class="card-text">{{book.volumeInfo.subtitle}}</p>
+                            Autor:
+                            <b *ngFor="let author of book.volumeInfo.authors">
+                                {{author}}
+                            </b>
+                        </div>
+                        <div class="card-footer d-flex flex-column">
                             <small class="text-muted">
-                                Idioma:
-                                {{book.volumeInfo.language}}
+                                Fecha de publicación:
+                                {{book.volumeInfo.publishedDate}}
                             </small>
-                            <small class="text-muted">
-                                Número de páginas:
-                                {{book.volumeInfo.pageCount}}
-                            </small>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">
+                                    Idioma:
+                                    {{book.volumeInfo.language}}
+                                </small>
+                                <small class="text-muted">
+                                    Número de páginas:
+                                    {{book.volumeInfo.pageCount}}
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
