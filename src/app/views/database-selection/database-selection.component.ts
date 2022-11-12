@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BookModel } from 'src/app/models/BookModel';
+import { ManageBooksService } from 'src/app/services/manage-books/manage-books.service';
 import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
 import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
@@ -19,65 +21,18 @@ export class DatabaseSelectionComponent implements OnInit {
     user: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
-  
-  modalTitle: string = "Crear conexión";
 
-  constructor(
-    public selectOptionService: SelectOptionService,
-    public manageDatabasesService: ManageDatabasesService
-  ) { }
+  private URL = "https://www.googleapis.com/books/v1/volumes?q=''";
+
+  books: Array<BookModel>
+
+  constructor(private bookService: ManageBooksService) { }
 
   ngOnInit(): void {
-  }
-
-  createDatabaseConfiguration () {
-    this.modalTitle = "Crear conexión";
-    this.databaseForm.reset();
-    this.selectOptionService.optionSelected = -1;
-  }
-
-  loadDatabaseData (id: number) {
-    this.modalTitle = "Editar conexión";
-    this.databaseForm.reset();
-    let database = this.manageDatabasesService.readDatabase(id);
-    
-    if(database){
-      this.databaseForm.patchValue({
-        name: database.name,
-        direction: database.direction,
-        port: database.port,
-        user: database.user,
-        password: database.password
-      })
-    }
-  }
-
-  saveDatabaseConfiguration() {
-    let database = {
-      id: this.selectOptionService.optionSelected,
-      name: this.databaseForm.value.name,
-      direction: this.databaseForm.value.direction,
-      port: this.databaseForm.value.port,
-      user: this.databaseForm.value.user,
-      password: this.databaseForm.value.password
-    }
-    this.manageDatabasesService.updateDatabase(database);
-  }
-
-  addDatabaseConfiguration() {
-    this.manageDatabasesService.createDatabase({
-      id: this.manageDatabasesService.readAllDatabases.length+1,
-      name: this.databaseForm.value.name!,
-      direction: this.databaseForm.value.direction!,
-      port: this.databaseForm.value.port!,
-      user: this.databaseForm.value.user!,
-      password: this.databaseForm.value.password!
+    this.bookService.getBooks(this.URL).subscribe(async data => {
+        this.books = await data.items;
     });
-    
   }
 
-  removeDatabaseConfiguration () {
-    this.manageDatabasesService.deleteDatabase(this.selectOptionService.optionSelected);    
-  }
 
 }

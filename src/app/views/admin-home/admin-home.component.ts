@@ -9,8 +9,9 @@ export class AdminHomeComponent implements OnInit {
 
   options = [
     {
-      "ImageSource" : "../assets/Images/basededatos.png",
-      "Title" : "Bases de datos",
+      "ImageSource" : "../assets/Images/libros.png",
+    //   "Title" : "Bases de datos",
+        "Title" : "Libros",
       "Link" : "/database-selection"
     },
     {

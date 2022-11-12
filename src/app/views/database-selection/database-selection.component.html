@@ -1,96 +1,40 @@
-<app-toolbar [title]="'Bases de Datos'"></app-toolbar>
+<app-toolbar [title]="'Libros'"></app-toolbar>
 
 <app-sidenav-builder>
-    <div class="controls">
-        <app-add-button 
-            data-bs-toggle="modal" 
-            data-bs-target="#add-modal" 
-            (click)="createDatabaseConfiguration()"
-        >
-
-        </app-add-button>
-    </div>
-    <div class="grid-container">
-        <app-removable-option
-            [imageSource]="imageSource"
-            [option]="database"
-            data-bs-toggle="modal"
-            data-bs-target="#add-modal"
-            (click)="loadDatabaseData(database.id)"
-            *ngFor="let database of manageDatabasesService.readAllDatabases()" >
-            <app-remove-button></app-remove-button>
-        </app-removable-option>
+    <div class="container py-4" *ngIf="books">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col" *ngFor="let book of books">
+                <div class="card h-100">
+                    <div class="d-flex justify-content-center">
+                        <img src="{{book.volumeInfo?.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}} Image" width="150vw">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{book.volumeInfo.title}}</h5>
+                        <p class="card-text">{{book.volumeInfo.subtitle}}</p>
+                        Autor:
+                        <b *ngFor="let author of book.volumeInfo.authors">
+                            {{author}}
+                        </b>
+                    </div>
+                    <div class="card-footer d-flex flex-column">
+                        <small class="text-muted">
+                            Fecha de publicación:
+                            {{book.volumeInfo.publishedDate}}
+                        </small>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">
+                                Idioma:
+                                {{book.volumeInfo.language}}
+                            </small>
+                            <small class="text-muted">
+                                Número de páginas:
+                                {{book.volumeInfo.pageCount}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </app-sidenav-builder>
-
-
-<app-modal [modalId]="'add-modal'">
-    <div class="header">
-        <h2 class="modal-title" id="exampleModalLabel">
-            {{modalTitle}} 
-        </h2>
-    </div>
-    <div class="body">
-        <form [formGroup]="databaseForm">
-            <p class="field-title">
-                Nombre:
-            </p>
-            <input type="text" [class.is-invalid]="databaseForm.get('name')?.touched && databaseForm.get('name')?.invalid" class="form-control" formControlName="name">
-            <p class="field-title">
-                Dirección:
-            </p>
-            <input type="text" [class.is-invalid]="databaseForm.get('direction')?.touched && databaseForm.get('direction')?.invalid" class="form-control" formControlName="direction">
-            <p class="field-title">
-                Puerto:
-            </p>
-            <input type="text" [class.is-invalid]="databaseForm.get('port')?.touched && databaseForm.get('port')?.invalid" class="form-control" formControlName="port">
-            <p class="field-title">
-                Usuario:
-            </p>
-            <input type="text" [class.is-invalid]="databaseForm.get('user')?.touched && databaseForm.get('user')?.invalid" class="form-control" formControlName="user">
-            <p class="field-title">
-                Contraseña:
-            </p>
-            <input type="text" [class.is-invalid]="databaseForm.get('password')?.touched && databaseForm.get('password')?.invalid" class="form-control" formControlName="password">
-        </form>
-    </div>
-    <hr>
-    <div class="footer">
-        <div class="save-button">
-            <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="selectOptionService.optionSelected != -1 ; else addButton" (click)="saveDatabaseConfiguration()">
-                <strong>
-                    Guardar
-                </strong>
-            </button>
-            <ng-template #addButton>
-                <button type="button" [disabled]="databaseForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" (click)="addDatabaseConfiguration()">
-                    <strong>
-                        Crear
-                    </strong>
-                </button>
-            </ng-template>
-        </div>
-    </div>
-</app-modal>
-
-<app-modal [modalId]="'remove-modal'">
-    <div class="header">
-        <h2 class="modal-title" id="exampleModalLabel">
-            Eliminar conexión
-        </h2>
-    </div>
-    <div class="body">
-        ¿Estás seguro de eliminar?
-    </div>
-    <hr>
-    <div class="footer">
-        <div class="save-button">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeDatabaseConfiguration()">
-                <strong>
-                    Eliminar
-                </strong>
-            </button>
-        </div>
-    </div>
-</app-modal>

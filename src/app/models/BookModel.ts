@@ -5,6 +5,9 @@ export interface BookModel {
         authors: Array<string>,
         publishedDate: string,
         language: string,
-        pageCount: number
+        pageCount: number,
+        imageLinks: {
+            thumbnail: string
+        }
     }
 }
