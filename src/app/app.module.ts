@@ -36,6 +36,10 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
 import { ModalComponent } from './components/modal/modal.component';
 import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
 import { RemovableOptionComponent } from './components/removable-option/removable-option.component';
+import { DictionarySearchComponent } from './components/dictionary-search/dictionary-search.component';
+import { SearchButtonComponent } from './components/search-button/search-button.component';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
 import { StepsComponent } from './components/steps/steps.component';
 import { StepTemplateComponent } from './components/step-template/step-template.component';
@@ -48,7 +52,6 @@ import { SummaryWizardComponent } from './components/summary-wizard/summary-wiza
 import { CalendarViewComponent } from './views/calendar-view/calendar-view.component';
 import { CalendarCommonModule,CalendarModule, CalendarMonthModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeMx);
 
@@ -74,6 +77,10 @@ registerLocaleData(localeMx);
     ModalComponent,
     RemoveButtonComponent,
     RemovableOptionComponent,
+    DictionarySearchComponent,
+    SearchButtonComponent,
+    SearchModalComponent,
+    RemovableOptionComponent,
     GenerateDocsWizardComponent,
     StepsComponent,
     StepTemplateComponent,
@@ -94,6 +101,8 @@ registerLocaleData(localeMx);
     MatIconModule,
     MatDividerModule,
     ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
     FormsModule,
     MatTableModule,
     MatInputModule,
