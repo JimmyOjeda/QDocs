@@ -30,6 +30,10 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
 import { ModalComponent } from './components/modal/modal.component';
 import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
 import { RemovableOptionComponent } from './components/removable-option/removable-option.component';
+import { DictionarySearchComponent } from './components/dictionary-search/dictionary-search.component';
+import { SearchButtonComponent } from './components/search-button/search-button.component';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,10 @@ import { RemovableOptionComponent } from './components/removable-option/removabl
     ReturnButtonComponent,
     ModalComponent,
     RemoveButtonComponent,
-    RemovableOptionComponent
+    RemovableOptionComponent,
+    DictionarySearchComponent,
+    SearchButtonComponent,
+    SearchModalComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,8 @@ import { RemovableOptionComponent } from './components/removable-option/removabl
     MatIconModule,
     MatDividerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
