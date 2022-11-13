@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localeMx from '@angular/common/locales/es-MX';
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -42,6 +45,12 @@ import { WizardOptionComponent } from './components/wizard-option/wizard-option.
 import { WizardService } from './services/wizard/wizard.service';
 import { RecordWizardComponent } from './components/record-wizard/record-wizard.component';
 import { SummaryWizardComponent } from './components/summary-wizard/summary-wizard.component';
+import { CalendarViewComponent } from './views/calendar-view/calendar-view.component';
+import { CalendarCommonModule,CalendarModule, CalendarMonthModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { HttpClientModule } from '@angular/common/http';
+
+registerLocaleData(localeMx);
 
 @NgModule({
   declarations: [
@@ -72,7 +81,8 @@ import { SummaryWizardComponent } from './components/summary-wizard/summary-wiza
     TemplateWizardComponent,
     WizardOptionComponent,
     RecordWizardComponent,
-    SummaryWizardComponent
+    SummaryWizardComponent,
+    CalendarViewComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +97,12 @@ import { SummaryWizardComponent } from './components/summary-wizard/summary-wiza
     FormsModule,
     MatTableModule,
     MatInputModule,
+    CommonModule,
+    CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory
+    }),
+    HttpClientModule
   ],
   providers: [WizardService, MatFormField],
   bootstrap: [AppComponent]
