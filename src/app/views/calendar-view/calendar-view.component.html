@@ -1,0 +1,43 @@
+<app-toolbar></app-toolbar>
+
+<app-sidenav-builder>
+    <div class="calendar-container w-100">
+        <div class="calendar-header my-2 mx-5">
+            <div class="calendar-header-buttons">
+                <div
+                    class="btn btn-light"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                >
+                    Anterior
+                </div>
+                <div
+                    class="btn btn-primary"
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate"
+                >
+                    Hoy
+                </div>
+                <div
+                    class="btn btn-light"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                >
+                    Siguiente
+                </div>
+            </div>
+
+            <h3>{{ viewDate | calendarDate:(view+'ViewTitle'):locale }}</h3>
+
+        </div>
+
+        <div class="calendar mx-5">
+            <mwl-calendar-month-view
+                [viewDate]="viewDate"
+                [events]="events">
+            </mwl-calendar-month-view>
+        </div>
+    </div>
+</app-sidenav-builder>

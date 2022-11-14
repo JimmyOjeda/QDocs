@@ -22,7 +22,7 @@ export class DatabaseSelectionComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  private URL = "https://www.googleapis.com/books/v1/volumes?q=''";
+  private URL = "https://www.googleapis.com/books/v1/volumes?q=''&maxResults=8";
 
   books: Array<BookModel>
 

@@ -1,0 +1,25 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<app-modal [modalId]="'search-modal'">
+    <div class="header">
+        <h2 class="modal-title" id="exampleModalLabel">
+            Buscador de definiciones
+        </h2>
+    </div>
+    <div class="body">
+        <div class="form-field">
+            <p>Ingresa tu palabra para obtener definiciones de <strong>Wikipedia</strong></p>
+            <input id="Search" type="text" placeholder="Palabra" [formControl]="inputSearch" >
+            <button class="searchButton btn btn-primary" (click)="search()">Buscar</button>
+        </div>
+        <hr>
+        <p>
+            {{content}}
+        </p>
+        
+    </div>
+    <div class="footer">
+        
+    </div>
+</app-modal>

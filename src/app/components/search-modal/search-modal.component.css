@@ -1,0 +1,27 @@
+.form-field {
+    text-align: center;
+}
+
+#Search {
+    border-radius: 10px;
+    width: 13vw;
+}
+
+#Search:hover {
+    border-color: white;
+}
+
+#Search::placeholder {
+    text-align: center; 
+}
+
+.searchButton {
+    margin-left: 1vw;
+    background-color: #222831;
+    border-color: white;
+}
+
+.searchButton:active{
+    background-color: #222831;
+    border-color: #222831;
+}

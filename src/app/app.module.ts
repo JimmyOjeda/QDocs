@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,9 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localeMx from '@angular/common/locales/es-MX';
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -34,6 +37,9 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
 import { ModalComponent } from './components/modal/modal.component';
 import { RemoveButtonComponent } from './components/remove-button/remove-button.component';
 import { RemovableOptionComponent } from './components/removable-option/removable-option.component';
+import { DictionarySearchComponent } from './components/dictionary-search/dictionary-search.component';
+import { SearchButtonComponent } from './components/search-button/search-button.component';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
 import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
 import { StepsComponent } from './components/steps/steps.component';
 import { StepTemplateComponent } from './components/step-template/step-template.component';
@@ -44,6 +50,11 @@ import { WizardService } from './services/wizard/wizard.service';
 import { RecordWizardComponent } from './components/record-wizard/record-wizard.component';
 import { SummaryWizardComponent } from './components/summary-wizard/summary-wizard.component';
 import { ManageBooksService } from './services/manage-books/manage-books.service';
+import { CalendarViewComponent } from './views/calendar-view/calendar-view.component';
+import { CalendarCommonModule,CalendarModule, CalendarMonthModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+registerLocaleData(localeMx);
 
 @NgModule({
   declarations: [
@@ -67,6 +78,10 @@ import { ManageBooksService } from './services/manage-books/manage-books.service
     ModalComponent,
     RemoveButtonComponent,
     RemovableOptionComponent,
+    DictionarySearchComponent,
+    SearchButtonComponent,
+    SearchModalComponent,
+    RemovableOptionComponent,
     GenerateDocsWizardComponent,
     StepsComponent,
     StepTemplateComponent,
@@ -74,7 +89,8 @@ import { ManageBooksService } from './services/manage-books/manage-books.service
     TemplateWizardComponent,
     WizardOptionComponent,
     RecordWizardComponent,
-    SummaryWizardComponent
+    SummaryWizardComponent,
+    CalendarViewComponent
   ],
   imports: [
     BrowserModule,
@@ -87,8 +103,15 @@ import { ManageBooksService } from './services/manage-books/manage-books.service
     MatDividerModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
+    FormsModule,
     MatTableModule,
     MatInputModule,
+    CommonModule,
+    CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory
+    }),
     HttpClientModule
   ],
   providers: [WizardService, MatFormField, ManageBooksService],

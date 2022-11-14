@@ -7,7 +7,7 @@
       </a>
 
       <div class="menu">
-            <button mat-button class="menu-button" 
+            <button mat-button class="menu-button"
                 routerLink="/admin-home"
                 (click)="toggleSidenavService.close()"
             >
@@ -17,12 +17,22 @@
 
           <mat-divider></mat-divider>
 
-            <button mat-button class="menu-button" 
+            <button mat-button class="menu-button"
                 routerLink="/agent-home"
-                (click)="toggleSidenavService.close()"    
+                (click)="toggleSidenavService.close()"
             >
                 <mat-icon>home</mat-icon>
                 <span>Agent</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-button class="menu-button"
+                routerLink="/calendar"
+                (click)="toggleSidenavService.close()"
+            >
+                <mat-icon>home</mat-icon>
+                <span>Calendario</span>
             </button>
 
           <mat-divider></mat-divider>
