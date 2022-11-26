@@ -9,12 +9,13 @@ import { DictionarySelectionComponent } from './views/dictionary-selection/dicti
 import { DictionaryViewComponent } from './views/dictionary-view/dictionary-view.component';
 import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/generate-docs-complete.component';
 import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
+import { LoginComponent } from './views/login/login.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminHomeComponent
+    component: LoginComponent
   },
   {
     path: 'agent-home',

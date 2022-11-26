@@ -52,6 +52,7 @@ import { SummaryWizardComponent } from './components/summary-wizard/summary-wiza
 import { CalendarViewComponent } from './views/calendar-view/calendar-view.component';
 import { CalendarCommonModule,CalendarModule, CalendarMonthModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { LoginComponent } from './views/login/login.component';
 
 registerLocaleData(localeMx);
 
@@ -89,7 +90,8 @@ registerLocaleData(localeMx);
     WizardOptionComponent,
     RecordWizardComponent,
     SummaryWizardComponent,
-    CalendarViewComponent
+    CalendarViewComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
