@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login/login.service';
 import { ToggleSidenavService } from 'src/app/services/toggle-sidenav/toggle-sidenav.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { ToggleSidenavService } from 'src/app/services/toggle-sidenav/toggle-sid
 })
 export class SidenavBuilderComponent implements OnInit {
 
-  constructor( public toggleSidenavService: ToggleSidenavService) { }
+  constructor( 
+    public toggleSidenavService: ToggleSidenavService,
+    public loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
   }

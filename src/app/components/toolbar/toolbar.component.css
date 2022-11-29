@@ -16,3 +16,9 @@
     border: solid;
     border-color: white;
 }
+
+.logout {
+    background: none;
+    color: white;
+    border: none;
+}

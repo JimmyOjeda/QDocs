@@ -53,6 +53,8 @@ import { CalendarViewComponent } from './views/calendar-view/calendar-view.compo
 import { CalendarCommonModule,CalendarModule, CalendarMonthModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LoginComponent } from './views/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 registerLocaleData(localeMx);
 
@@ -92,6 +94,7 @@ registerLocaleData(localeMx);
     SummaryWizardComponent,
     CalendarViewComponent,
     LoginComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +118,7 @@ registerLocaleData(localeMx);
     }),
     HttpClientModule
   ],
-  providers: [WizardService, MatFormField],
+  providers: [WizardService, MatFormField, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

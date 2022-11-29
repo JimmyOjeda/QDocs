@@ -1,29 +1,34 @@
 <mat-sidenav-container (backdropClick)="toggleSidenavService.close()">
-  <!--HTML de menu lateral-->
-  <mat-sidenav mode="over" [opened]="toggleSidenavService.isShowing">
+    <!--HTML de menu lateral-->
+    <mat-sidenav mode="over" [opened]="toggleSidenavService.isShowing">
 
-      <a href="admin-home">
-          <img class="logo" src="../assets/Images/QDocsLogo.png" alt="Qdocs Logo">
-      </a>
+        <a href="admin-home">
+            <img class="logo" src="../assets/Images/QDocsLogo.png" alt="Qdocs Logo">
+        </a>
 
-      <div class="menu">
-            <button mat-button class="menu-button"
-                routerLink="/admin-home"
-                (click)="toggleSidenavService.close()"
-            >
-              <mat-icon>home</mat-icon>
-              <span>Admin</span>
-          </button>
+        <div class="menu">
 
-          <mat-divider></mat-divider>
+            <div *ngIf="this.loginService.role == 'admin'">
+                <button mat-button class="menu-button"
+                    routerLink="/admin-home"
+                    (click)="toggleSidenavService.close()"
+                >
+                    <mat-icon>home</mat-icon>
+                    <span>Admin</span>
+                </button>
+            </div>
 
-            <button mat-button class="menu-button"
-                routerLink="/agent-home"
-                (click)="toggleSidenavService.close()"
-            >
-                <mat-icon>home</mat-icon>
-                <span>Agent</span>
-            </button>
+            <div *ngIf="this.loginService.role == 'agent'">
+                <mat-divider></mat-divider>
+                <button mat-button class="menu-button"
+                    routerLink="/agent-home"
+                    (click)="toggleSidenavService.close()"
+                >
+                    <mat-icon>home</mat-icon>
+                    <span>Agent</span>
+                </button>
+            </div>
+            
 
             <mat-divider></mat-divider>
 
@@ -35,13 +40,13 @@
                 <span>Calendario</span>
             </button>
 
-          <mat-divider></mat-divider>
+            <mat-divider></mat-divider>
 
-      </div>
-  </mat-sidenav>
+        </div>
+    </mat-sidenav>
 
-  <!--HTML de contenido-->
-  <app-content-button>
-      <ng-content></ng-content>
-  </app-content-button>
+    <!--HTML de contenido-->
+    <app-content-button>
+        <ng-content></ng-content>
+    </app-content-button>
 </mat-sidenav-container>
