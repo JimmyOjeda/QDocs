@@ -11,9 +11,9 @@
 
     <form [formGroup]="loginForm" class="form-group">
         <div class="my-3">
-            <input type="text" placeholder="Email"
+            <input type="email" placeholder="Email"
                     [class.is-invalid]="loginForm.get('email')?.touched
-                    && loginForm.get('email')?.invalid"
+                    && loginForm.get('email')?.invalid" [email]="true"
                     class="form-control rounded-pill" formControlName="email"
             >
         </div>

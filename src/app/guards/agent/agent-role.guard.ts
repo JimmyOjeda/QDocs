@@ -10,15 +10,16 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class AgentRoleGuard implements CanActivate {
 
     constructor(
-        private cookieService: CookieService, 
+        private cookieService: CookieService,
         private router: Router,
         private loginService: LoginService
     ){}
 
     canActivate(
         route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        
+        state: RouterStateSnapshot
+    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
         const cookie = this.cookieService.check('tokenCookie');
         if (!cookie) {
             this.router.navigate(['/'])
@@ -28,5 +29,5 @@ export class AgentRoleGuard implements CanActivate {
         }
         return cookie;
     }
-  
+
 }
