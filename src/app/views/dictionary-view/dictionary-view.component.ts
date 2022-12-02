@@ -16,6 +16,17 @@ export class DictionaryViewComponent implements OnInit {
       value: 'pizza',
       viewValue: 'Pizza'
     },
+  ];
+
+  states = [
+    {
+        value: 'UE',
+        viewValue: 'Estados Unidos'
+    },
+    {
+        value: 'UK',
+        viewValue: 'Reino Unido'
+    }
   ]
 
   constructor() { }

@@ -16,10 +16,10 @@
 
         <div class="d-flex justify-content-center">
           <select class="w-50 dropdown" name="" id="">
+            <option value="">QDOCS prueba</option>
+            <option value="">Diccionario 1</option>
             <option value="">Option 1</option>
-            <option value="">Option 1</option>
-            <option value="">Option 1</option>
-            <option value="">Option 1</option>
+            <option value="">Option 2</option>
           </select>
         </div>
       </div>
@@ -30,7 +30,11 @@
             <h4>Entrada</h4>
             <h4>Token</h4>
           </div>
-          <div class="dictionary-entry">
+          <div class="dictionary-entry" *ngFor="let element of foods">
+            <p>{{element.value}}</p>
+            <p>{{element.viewValue}}</p>
+          </div>
+          <!-- <div class="dictionary-entry">
             <p>Nombre de cliente</p>
             <p>$Nombre_cliente</p>
           </div>
@@ -61,11 +65,7 @@
           <div class="dictionary-entry">
             <p>Nombre de cliente</p>
             <p>$Nombre_cliente</p>
-          </div>
-          <div class="dictionary-entry">
-            <p>Nombre de cliente</p>
-            <p>$Nombre_cliente</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
