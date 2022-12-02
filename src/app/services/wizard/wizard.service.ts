@@ -23,7 +23,7 @@ const TEMPLATES = [
     },
     {
       "id": "3",
-      "title" : "simulacion",
+      "title" : "Simulacion",
       "link" : "enlace",
       "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"

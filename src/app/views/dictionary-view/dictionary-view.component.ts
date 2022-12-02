@@ -42,7 +42,7 @@ export class DictionaryViewComponent implements OnInit {
       },
       {
           value: 'Apellido',
-          viewValue: '{apellido}'
+          viewValue: '${apellido}'
       },
       {
           value: 'Edad',
