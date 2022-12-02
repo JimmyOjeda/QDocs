@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Database } from 'src/app/model/database/database';
+import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 
 @Component({
   selector: 'app-dictionary-builder',
@@ -8,12 +12,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class DictionaryBuilderComponent implements OnInit {
 
-    public databases = [
-        "BD 01",
-        "BD 02",
-        "BD 03",
-        "BD 04"
-    ];
+    public databases: Database[];
 
     public tables = [
         "Tabla 01",
@@ -39,9 +38,11 @@ export class DictionaryBuilderComponent implements OnInit {
         tokens: new FormArray([], Validators.required)
     })
 
-    constructor() { }
+    constructor(private dictionaryService: ManageDictionariesService,
+        private router: Router, private databaseService: ManageDatabasesService) { }
 
     ngOnInit(): void {
+        this.databases = this.databaseService.readAllDatabases();
     }
 
     private addFormToken(): void {
@@ -92,6 +93,8 @@ export class DictionaryBuilderComponent implements OnInit {
                 "tokens": this.tokens
             };
             console.log(dictionaryTokens);
+            this.dictionaryService.createDictionary(dictionaryTokens.dictionaryName);
+            this.router.navigate(['/dictionary-selection']);
         }
     }
 

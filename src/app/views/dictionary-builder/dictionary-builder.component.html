@@ -12,9 +12,9 @@
                         <h3>Crear diccionario de datos</h3>
                     </div>
                     <app-search-button
-                        data-bs-toggle="modal" 
-                        data-bs-target="#search-modal" 
-                        
+                        data-bs-toggle="modal"
+                        data-bs-target="#search-modal"
+
                     >
 
                     </app-search-button>
@@ -37,7 +37,7 @@
                 <div class="d-flex justify-content-around">
                     <select class="w-25 dropdown rounded-pill fw-bold">
                         <option *ngFor="let database of databases">
-                            {{database}}
+                            {{database.name}}
                         </option>
                     </select>
 

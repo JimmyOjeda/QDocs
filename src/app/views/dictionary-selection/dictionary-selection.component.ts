@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 
 @Component({
   selector: 'app-dictionary-selection',
@@ -10,32 +11,12 @@ export class DictionarySelectionComponent implements OnInit {
 
   imageSource = "../assets/Images/diccionarioblack.png";
 
-  dictionaries = [
-    {
-      "title" : "Diccionario 01",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 02",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 03",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 04",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 05",
-      "link" : "enlace"
-    }
-  ];
+  dictionaries: any = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dictionaryService: ManageDictionariesService) {}
 
   ngOnInit(): void {
+    this.dictionaries = this.dictionaryService.readAllDictionaries();
   }
 
 }
