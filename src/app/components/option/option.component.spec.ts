@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OptionComponent } from './option.component';
 
 describe('OptionComponent', () => {
-  let component: OptionComponent;
+  let option: OptionComponent;
   let fixture: ComponentFixture<OptionComponent>;
 
   beforeEach(async () => {
@@ -13,11 +13,16 @@ describe('OptionComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(OptionComponent);
-    component = fixture.componentInstance;
+    option = fixture.componentInstance;
+    option.option = {
+      "title" : "Diccionario 01",
+      "link" : "enlace"
+    };
+    option.imageSource = "../assets/Images/diccionarioblack.png";
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(option).toBeTruthy();
   });
 });

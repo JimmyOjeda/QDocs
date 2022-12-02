@@ -16,7 +16,7 @@ export class SummaryWizardComponent implements OnInit {
   selectedRecord: Observable<RecordModel>;
   dictionaryColumns : ColumnModel[];
 
-  constructor(private wizardService : WizardService) {
+  constructor(public wizardService : WizardService) {
    }
 
   ngOnInit(): void {

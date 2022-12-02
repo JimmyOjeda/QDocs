@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CalendarDatePipe } from 'angular-calendar/modules/common/calendar-date.pipe';
 
 import { CalendarViewComponent } from './calendar-view.component';
 
@@ -8,6 +10,7 @@ describe('CalendarViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ CalendarViewComponent ]
     })
     .compileComponents();

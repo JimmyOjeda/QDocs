@@ -9,7 +9,7 @@ export class SearchDefinitionService {
 
   private dictionaryApi = "https://es.wikipedia.org/w/api.php?";
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   search (keyword: string): Observable<any> {
     const params = {

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WizardOptionComponent } from './wizard-option.component';
 
 describe('WizardOptionComponent', () => {
-  let component: WizardOptionComponent;
+  let wizardOption: WizardOptionComponent;
   let fixture: ComponentFixture<WizardOptionComponent>;
 
   beforeEach(async () => {
@@ -13,11 +13,17 @@ describe('WizardOptionComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(WizardOptionComponent);
-    component = fixture.componentInstance;
+    wizardOption = fixture.componentInstance;
+    wizardOption.option = {
+      "id": "1",
+      "title" : "Plantilla 1",
+      "image": "../assets/Images/plantillas-black.png"
+    };
+    wizardOption.isSelected = true;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(wizardOption).toBeTruthy();
   });
 });

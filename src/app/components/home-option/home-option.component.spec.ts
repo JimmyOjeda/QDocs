@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeOptionComponent } from './home-option.component';
 
 describe('HomeOptionComponent', () => {
-  let component: HomeOptionComponent;
+  let homeOption: HomeOptionComponent;
   let fixture: ComponentFixture<HomeOptionComponent>;
 
   beforeEach(async () => {
@@ -13,11 +13,16 @@ describe('HomeOptionComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(HomeOptionComponent);
-    component = fixture.componentInstance;
+    homeOption = fixture.componentInstance;
+    homeOption.option = {
+      "ImageSource" : "../assets/Images/plantilla.png",
+      "Title" : "Plantillas",
+      "Link" : "/template-selection"
+    };
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(homeOption).toBeTruthy;
   });
 });

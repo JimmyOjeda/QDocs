@@ -17,7 +17,7 @@ export class RecordWizardComponent implements OnInit {
   selectedRecord : Observable<RecordModel>;
   @Output() completedStep : EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private wizardService : WizardService) { }
+  constructor(public wizardService : WizardService) { }
 
   ngOnInit(): void {
     this.records = this.wizardService.getRecords()

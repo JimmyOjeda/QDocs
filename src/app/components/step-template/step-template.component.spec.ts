@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StepTemplateComponent } from './step-template.component';
 
 describe('StepTemplateComponent', () => {
-  let component: StepTemplateComponent;
+  let stepTemplate: StepTemplateComponent;
   let fixture: ComponentFixture<StepTemplateComponent>;
 
   beforeEach(async () => {
@@ -13,11 +13,12 @@ describe('StepTemplateComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(StepTemplateComponent);
-    component = fixture.componentInstance;
+    stepTemplate = fixture.componentInstance;
+    stepTemplate.step = { stepIndex: 1, isComplete: false };
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(stepTemplate).toBeTruthy();
   });
 });
