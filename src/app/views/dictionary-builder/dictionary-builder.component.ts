@@ -15,21 +15,42 @@ export class DictionaryBuilderComponent implements OnInit {
     public databases: Database[];
 
     public tables = [
-        "Tabla 01",
-        "Tabla 02",
-        "Tabla 03",
+        "Tabla 1",
+        "Tabla 2",
+        "Tabla 3",
         "Tabla 04"
     ];
 
-    public columns = [
-        "Id",
+    public columns: any = [];
+
+    public columnsEstados = [
+        "Pais",
+        "Estado",
+        "Municipio"
+    ];
+    public columnsEscuela = [
+        "Universidad",
+        "Facultad",
+        "Licenciatura"
+    ];
+    public columnsSimulacion = [
         "Nombre",
-        "Dirección",
-        "Teléfono",
-        "Escuela",
-        "Apodo",
+        "Apellido",
         "Edad"
     ];
+
+    public updateColumns() {
+        console.log(this.selection);
+        if (this.selection == "Paises") {
+            this.columns = this.columnsEstados;
+        } else if (this.selection == "Escuela") {
+            this.columns = this.columnsEscuela;
+        } else if (this.selection == "Simulacion") {
+            this.columns = this.columnsSimulacion;
+        }
+    }
+
+    selection: string = "";
 
     public tokens: any = [];
 
@@ -75,7 +96,7 @@ export class DictionaryBuilderComponent implements OnInit {
         };
         this.tokens.push(newToken);
         this.addFormToken();
-        this.columns = this.columns.filter(item => item !== column);
+        this.columns = this.columns.filter((item:any) => item !== column);
     }
 
     removeToken(index: number) {

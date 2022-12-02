@@ -11,21 +11,21 @@ export class ManageDatabasesService {
   databases: Database[] = [
     {
       id:1,
-      name: "BD1",
+      name: "Paises",
       direction: "192",
       port: "8080",
       user: "user1",
       password: "password1"
-      
+
     },
     {
       id:2,
-      name: "BD2",
+      name: "Escuela",
       direction: "192",
       port: "8080",
       user: "user1",
       password: "password1"
-      
+
     }
   ];
 
@@ -41,7 +41,7 @@ export class ManageDatabasesService {
     return this.databases.find(aDatabase => aDatabase.id === id);
   }
 
-  updateDatabase (database: Database) { 
+  updateDatabase (database: Database) {
     let oldDatabase = this.databases.find(aDatabase => aDatabase.id === database.id)!;
     this.databases[this.databases.indexOf(oldDatabase)] = database;
   }
@@ -51,5 +51,5 @@ export class ManageDatabasesService {
     this.databases.splice(this.databases.indexOf(database),1);
   }
 
-  
+
 }

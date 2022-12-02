@@ -35,8 +35,8 @@
                 </div>
 
                 <div class="d-flex justify-content-around">
-                    <select class="w-25 dropdown rounded-pill fw-bold">
-                        <option *ngFor="let database of databases">
+                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="selection" [ngModelOptions]="{standalone: true}" (change)="updateColumns()">
+                        <option *ngFor="let database of databases" value="{{database.name}}">
                             {{database.name}}
                         </option>
                     </select>

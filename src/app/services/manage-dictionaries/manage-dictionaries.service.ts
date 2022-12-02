@@ -9,19 +9,11 @@ export class ManageDictionariesService {
 
     dictionaries = [
         {
-            "title" : "QDOCS prueba",
+            "title" : "Diccionario paises",
             "link" : "enlace"
         },
         {
-            "title" : "Diccionario 1",
-            "link" : "enlace"
-        },
-        {
-            "title" : "Option 1",
-            "link" : "enlace"
-        },
-        {
-            "title" : "Option 2",
+            "title" : "Diccionario escuela",
             "link" : "enlace"
         }
     ]
