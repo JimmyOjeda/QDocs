@@ -18,8 +18,7 @@
           <select class="w-50 dropdown" [(ngModel)]="selection" name="dictionary-selection" id="">
             <option value="1">QDOCS prueba</option>
             <option value="2">Diccionario 1</option>
-            <option value="3">Option 1</option>
-            <option value="4">Option 2</option>
+            <option value="3">Simulacion</option>
           </select>
         </div>
       </div>
@@ -31,13 +30,19 @@
             <h4>Token</h4>
           </div>
           <div *ngIf="selection == '1'">
-            <div class="dictionary-entry" *ngFor="let element of foods">
+            <div class="dictionary-entry" *ngFor="let element of Qdocs_prueba">
                 <p>{{element.value}}</p>
                 <p>{{element.viewValue}}</p>
             </div>
           </div>
           <div *ngIf="selection == '2'">
-            <div class="dictionary-entry" *ngFor="let element of states">
+            <div class="dictionary-entry" *ngFor="let element of Diccionario1">
+                <p>{{element.value}}</p>
+                <p>{{element.viewValue}}</p>
+            </div>
+          </div>
+          <div *ngIf="selection == '3'">
+            <div class="dictionary-entry" *ngFor="let element of Simulacion">
                 <p>{{element.value}}</p>
                 <p>{{element.viewValue}}</p>
             </div>

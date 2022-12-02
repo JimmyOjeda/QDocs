@@ -7,34 +7,49 @@ import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/
   styleUrls: ['./dictionary-view.component.css']
 })
 export class DictionaryViewComponent implements OnInit {
-    foods = [
+    Qdocs_prueba = [
         {
-            value: 'Corte',
-            viewValue: 'Carne'
+            value: 'Pais',
+            viewValue: '${pais}'
         },
         {
-            value: 'Hamburguesa',
-            viewValue: 'Cangreburguer'
+            value: 'Estado',
+            viewValue: '${estado}'
         },
         {
-            value: 'Torta',
-            viewValue: 'Doradita'
+            value: 'Municipio',
+            viewValue: '${municipio}'
         }
     ];
-    states = [
+    Diccionario1 = [
         {
-            value: 'UE',
-            viewValue: 'Estados Unidos'
+            value: 'Universidad',
+            viewValue: '${universidad}'
         },
         {
-            value: 'UK',
-            viewValue: 'Reino Unido'
+            value: 'Facultad',
+            viewValue: '${facultad}'
         },
         {
-            value: 'MX',
-            viewValue: 'México'
+            value: 'Licenciatura',
+            viewValue: '${licenciatura}'
         }
     ]
+    Simulacion = [
+      {
+          value: 'Nombre',
+          viewValue: '${nombre}'
+      },
+      {
+          value: 'Apellido',
+          viewValue: '{apellido}'
+      },
+      {
+          value: 'Edad',
+          viewValue: '${edad}'
+      }
+  ]
+
     selection: string = '';
 
   constructor(public dictionaryService: ManageDictionariesService) { }
