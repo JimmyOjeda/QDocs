@@ -24,6 +24,7 @@ export class LoginService {
             this.token = res.token;
             this.cookieService.set("tokenCookie",this.token);
             this.role = res.role;
+            console.log(res.role);
             this.redirect(res.role);
         }
     }
@@ -53,6 +54,10 @@ export class LoginService {
 
     loginBackendDummy (email: string, password: string) {
         let res = this.getResponseDummy();
+        console.log(email);
+        if (email == "jimmy@qdocs.com") {
+            res.role = "admin";
+        }
         return res;
     }
 
