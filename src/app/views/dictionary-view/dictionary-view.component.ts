@@ -48,7 +48,7 @@ export class DictionaryViewComponent implements OnInit {
           value: 'Edad',
           viewValue: '${edad}'
       }
-  ]
+    ]
 
     selection: string = '';
 
