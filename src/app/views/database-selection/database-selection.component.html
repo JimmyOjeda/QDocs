@@ -2,9 +2,9 @@
 
 <app-sidenav-builder>
     <div class="controls">
-        <app-add-button 
-            data-bs-toggle="modal" 
-            data-bs-target="#add-modal" 
+        <app-add-button
+            data-bs-toggle="modal"
+            data-bs-target="#add-modal"
             (click)="createDatabaseConfiguration()"
         >
 
@@ -17,7 +17,7 @@
             data-bs-toggle="modal"
             data-bs-target="#add-modal"
             (click)="loadDatabaseData(database.id)"
-            *ngFor="let database of manageDatabasesService.readAllDatabases()" >
+            *ngFor="let database of databases" >
             <app-remove-button></app-remove-button>
         </app-removable-option>
     </div>
@@ -28,7 +28,7 @@
 <app-modal [modalId]="'add-modal'">
     <div class="header">
         <h2 class="modal-title" id="exampleModalLabel">
-            {{modalTitle}} 
+            {{modalTitle}}
         </h2>
     </div>
     <div class="body">

@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
     sendValues() {
         console.log(this.loginForm.value);
-        this.loginForm.reset();
         this.loginService.login(this.loginForm.value.email,this.loginForm.value.password);
+        this.loginForm.reset();
     }
 
 }

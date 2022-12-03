@@ -66,7 +66,7 @@ export class LoginService {
         let res = {
             auth: true,
             token: "nuevotokensito",
-            role: "agent"
+            role: "admin"
         }
         return res;
     }
