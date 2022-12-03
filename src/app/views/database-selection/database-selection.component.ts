@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Response } from 'src/app/model/response';
+import { Database } from 'src/app/model/database/database';
 import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
 import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
@@ -31,6 +31,10 @@ export class DatabaseSelectionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadAllDatabases();
+  }
+
+  loadAllDatabases() {
     this.manageDatabasesService.readAllDatabases()
         .subscribe(
             response => this.databases = response.data,
@@ -47,17 +51,20 @@ export class DatabaseSelectionComponent implements OnInit {
   loadDatabaseData (id: number) {
     this.modalTitle = "Editar conexión";
     this.databaseForm.reset();
-    let database = this.manageDatabasesService.readDatabase(id);
-
-    if(database){
-      this.databaseForm.patchValue({
-        name: database.name,
-        direction: database.direction,
-        port: database.port,
-        user: database.user,
-        password: database.password
-      })
-    }
+    let database: any
+    this.manageDatabasesService.readDatabase(id)
+        .subscribe(
+            (response: any) =>  {
+                this.databaseForm.patchValue({
+                    name: response.data.name,
+                    direction: response.data.url,
+                    port: "",
+                    user: response.data.username,
+                    password: response.data.password
+                })
+            },
+            error => console.log(JSON.stringify(error))
+        );
   }
 
   saveDatabaseConfiguration() {
@@ -69,7 +76,11 @@ export class DatabaseSelectionComponent implements OnInit {
       user: this.databaseForm.value.user,
       password: this.databaseForm.value.password
     }
-    this.manageDatabasesService.updateDatabase(database);
+    this.manageDatabasesService.updateDatabase(database)
+        .subscribe(
+            response => this.loadAllDatabases(),
+            error => console.log(JSON.stringify(error))
+        );
   }
 
   addDatabaseConfiguration() {
@@ -80,12 +91,18 @@ export class DatabaseSelectionComponent implements OnInit {
       port: this.databaseForm.value.port!,
       user: this.databaseForm.value.user!,
       password: this.databaseForm.value.password!
-    });
-
+    }).subscribe(
+        response => this.loadAllDatabases(),
+        error => console.log(JSON.stringify(error))
+    );
   }
 
   removeDatabaseConfiguration () {
-    this.manageDatabasesService.deleteDatabase(this.selectOptionService.optionSelected);
+    this.manageDatabasesService.deleteDatabase(this.selectOptionService.optionSelected)
+        .subscribe(
+            reponse => this.loadAllDatabases(),
+            error => console.log(JSON.stringify(error))
+        );
   }
 
 }

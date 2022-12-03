@@ -16,7 +16,7 @@
             [option]="database"
             data-bs-toggle="modal"
             data-bs-target="#add-modal"
-            (click)="loadDatabaseData(database.id)"
+            (click)="loadDatabaseData(database._id)"
             *ngFor="let database of databases" >
             <app-remove-button></app-remove-button>
         </app-removable-option>

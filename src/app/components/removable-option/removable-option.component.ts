@@ -10,14 +10,14 @@ export class RemovableOptionComponent implements OnInit {
 
   @Input() imageSource: String = "Not found";
   @Input() option: any;
-  
+
   constructor(public selectOptionService: SelectOptionService) { }
 
   ngOnInit(): void {
   }
 
   updateSelectedOption () {
-    this.selectOptionService.updateSelectedOption(this.option.id);
+    this.selectOptionService.updateSelectedOption(this.option._id);
   }
 
 }
