@@ -12,9 +12,9 @@
                         <h3>Crear diccionario de datos</h3>
                     </div>
                     <app-search-button
-                        data-bs-toggle="modal" 
-                        data-bs-target="#search-modal" 
-                        
+                        data-bs-toggle="modal"
+                        data-bs-target="#search-modal"
+
                     >
 
                     </app-search-button>
@@ -35,14 +35,14 @@
                 </div>
 
                 <div class="d-flex justify-content-around">
-                    <select class="w-25 dropdown rounded-pill fw-bold">
-                        <option *ngFor="let database of databases">
-                            {{database}}
+                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="databaseIdSelected" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let database of databases" value="{{database._id}}">
+                            {{database.name}}
                         </option>
                     </select>
 
-                    <select class="w-25 dropdown rounded-pill fw-bold">
-                        <option *ngFor="let table of tables">
+                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="tableSelected" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let table of tables" value="{{table}}">
                             {{table}}
                         </option>
                     </select>
@@ -132,7 +132,7 @@
                     <div class="d-flex justify-content-center">
                         <button class="btn bg-white fs-4 rounded-pill px-5 py-0
                                         mt-3"
-                                (click)="sendTokens()"
+                                (click)="saveDictionary()"
                                 [disabled]="DictionaryForm.status != 'VALID'"
                         >
                         Guardar</button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
+import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
 @Component({
   selector: 'app-dictionary-selection',
@@ -8,34 +9,31 @@ import { Router } from '@angular/router';
 })
 export class DictionarySelectionComponent implements OnInit {
 
-  imageSource = "../assets/Images/diccionarioblack.png";
+    imageSource = "../assets/Images/diccionarioblack.png";
 
-  dictionaries = [
-    {
-      "title" : "Diccionario 01",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 02",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 03",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 04",
-      "link" : "enlace"
-    },
-    {
-      "title" : "Diccionario 05",
-      "link" : "enlace"
+    dictionaries: any = [];
+
+    constructor(private manageDictionariesService: ManageDictionariesService,
+        private selectOptionService: SelectOptionService) {}
+
+    ngOnInit(): void {
+        this.loadAllDictionaries();
     }
-  ];
 
-  constructor(private router: Router) {}
+    loadAllDictionaries() {
+        this.manageDictionariesService.readAllDictionaries()
+            .subscribe(
+                response  => this.dictionaries = response.data,
+                error => console.log(JSON.stringify(error))
+            )
+    }
 
-  ngOnInit(): void {
-  }
+    removeDictionary() {
+        this.manageDictionariesService.deleteDictionary(this.selectOptionService.optionSelected)
+            .subscribe(
+                response => this.loadAllDictionaries(),
+                error => console.log(JSON.stringify(error))
+            )
+    }
 
 }

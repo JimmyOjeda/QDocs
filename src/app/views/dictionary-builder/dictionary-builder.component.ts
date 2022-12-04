@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 
 @Component({
   selector: 'app-dictionary-builder',
@@ -8,21 +11,9 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class DictionaryBuilderComponent implements OnInit {
 
-    public databases = [
-        "BD 01",
-        "BD 02",
-        "BD 03",
-        "BD 04"
-    ];
-
-    public tables = [
-        "Tabla 01",
-        "Tabla 02",
-        "Tabla 03",
-        "Tabla 04"
-    ];
-
-    public columns = [
+    databases: any = [];
+    tables: any = [];
+    columns = [
         "Id",
         "Nombre",
         "Dirección",
@@ -31,17 +22,24 @@ export class DictionaryBuilderComponent implements OnInit {
         "Apodo",
         "Edad"
     ];
+    databaseIdSelected: string;
+    tableSelected: string;
 
-    public tokens: any = [];
+    tokens: any = [];
 
-    public DictionaryForm: FormGroup = new FormGroup({
+    DictionaryForm: FormGroup = new FormGroup({
         dictionaryName: new FormControl('', Validators.required),
         tokens: new FormArray([], Validators.required)
     })
 
-    constructor() { }
+    constructor(
+        private router: Router,
+        private databaseService: ManageDatabasesService,
+        private dictionaryService: ManageDictionariesService) { }
 
     ngOnInit(): void {
+        this.loadAllDatabases();
+        this.loadTablesFromDatabase();
     }
 
     private addFormToken(): void {
@@ -84,15 +82,43 @@ export class DictionaryBuilderComponent implements OnInit {
         this.tokens = this.tokens.filter((item: any) => item !== column);
     }
 
-    sendTokens() {
+    saveDictionary() {
         if(this.DictionaryForm.status == 'VALID') {
             this.savetokens();
             const dictionaryTokens = {
                 "dictionaryName": this.DictionaryForm.value.dictionaryName,
+                "databaseSelected": this.databaseIdSelected,
+                "tableSelected": this.tableSelected,
                 "tokens": this.tokens
             };
             console.log(dictionaryTokens);
+
+            // * saving dictionaries
+            this.dictionaryService.createDictionary({
+                "name": this.DictionaryForm.value.dictionaryName,
+                "database": this.databaseIdSelected
+            }).subscribe(
+                response => this.router.navigateByUrl('/dictionary-selection'),
+                error => console.log(JSON.stringify(error))
+            )
         }
+    }
+
+    loadAllDatabases() {
+        this.databaseService.readAllDatabases()
+            .subscribe(
+                response => this.databases = response.data,
+                error => console.log(JSON.stringify(error))
+            );
+    }
+
+    loadTablesFromDatabase() {
+        this.tables = [
+            "Tabla 01",
+            "Tabla 02",
+            "Tabla 03",
+            "Tabla 04"
+        ];
     }
 
 }

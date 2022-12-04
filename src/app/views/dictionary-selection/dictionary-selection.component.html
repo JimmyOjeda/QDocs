@@ -7,9 +7,35 @@
     </app-add-button>
   </div>
   <div class="grid-container">
-        <app-option [imageSource]="imageSource" [option]="dictionary" *ngFor="let dictionary of dictionaries">
-
-        </app-option>
+        <app-removable-option
+            [imageSource]="imageSource"
+            [option]="dictionary"
+            data-bs-toggle="modal"
+            data-bs-target="#add-modal"
+            *ngFor="let dictionary of dictionaries" >
+            <app-remove-button></app-remove-button>
+        </app-removable-option>
   </div>
 
 </app-sidenav-builder>
+
+<app-modal [modalId]="'remove-modal'">
+    <div class="header">
+        <h2 class="modal-title" id="exampleModalLabel">
+            Eliminar diccionario
+        </h2>
+    </div>
+    <div class="body">
+        ¿Estás seguro de eliminar?
+    </div>
+    <hr>
+    <div class="footer">
+        <div class="save-button">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeDictionary()">
+                <strong>
+                    Eliminar
+                </strong>
+            </button>
+        </div>
+    </div>
+</app-modal>

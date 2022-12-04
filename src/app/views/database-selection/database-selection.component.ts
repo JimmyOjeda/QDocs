@@ -51,7 +51,6 @@ export class DatabaseSelectionComponent implements OnInit {
   loadDatabaseData (id: number) {
     this.modalTitle = "Editar conexión";
     this.databaseForm.reset();
-    let database: any
     this.manageDatabasesService.readDatabase(id)
         .subscribe(
             (response: any) =>  {
