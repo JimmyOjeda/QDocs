@@ -1,5 +1,4 @@
 export interface OptionModel{
-  id : String;
-  title : String;
-  image : String
+  _id : String;
+  name : String;
 }

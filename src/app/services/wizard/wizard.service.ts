@@ -1,66 +1,67 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { DictionaryModel } from 'src/app/models/DictionaryModel';
 import { OptionModel } from 'src/app/models/OptionModel';
 import { TemplateModel } from 'src/app/models/TemplateModel';
 import { RecordModel } from 'src/app/models/RecordModel';
 import { DataSource } from '@angular/cdk/collections';
+import { ManageTemplatesService } from '../manage-templates/manage-templates.service';
+import { Template } from 'src/app/model/template/template';
+import { TemplateResponse } from 'src/app/model/template/templates-response';
+import { TemplatesResponse } from 'src/app/model/template/template-response';
+import { ManageDictionariesService } from '../manage-dictionaries/manage-dictionaries.service';
+import { ManageEntriesService } from '../manage-entries/manage-entries.service';
+import { ColumnModel } from 'src/app/models/ColumnModel';
 
 const TEMPLATES = [
     {
       "id": "1",
       "title" : "Plantilla 1",
       "link" : "enlace",
-      "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"
     },
     {
       "id": "2",
       "title" : "Plantilla 2",
       "link" : "enlace",
-      "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"
     },
     {
       "id": "3",
       "title" : "Plantilla 3",
       "link" : "enlace",
-      "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"
     },
     {
       "id": "4",
       "title" : "Plantilla 4",
       "link" : "enlace",
-      "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"
     },
     {
       "id": "5",
       "title" : "Plantilla 5",
       "link" : "enlace",
-      "image": "../assets/Images/plantillas-black.png",
       "dictionary_id": "1"
     }
 ];
 
 const DICTIONARIES : DictionaryModel[] = [
   {
-    id: '1',
+    _id: '1',
     name: 'Ventas',
-    database_id: '1',
-    table_id: 'clientes_table',
+    database: '1',
     columns: [
       {
-        api_name: 'nombre',
+        entry: 'nombre',
         label: 'Nombre'
       },
       {
-        api_name: 'apellido',
+        entry: 'apellido',
         label: 'Apellido'
       },
       {
-        api_name: 'edad',
+        entry: 'edad',
         label: 'Edad'
       }
     ]
@@ -91,35 +92,90 @@ const RECORDS = [
 })
 export class WizardService {
 
-  private templates$: BehaviorSubject<TemplateModel[]> = new BehaviorSubject<TemplateModel[]>(TEMPLATES);
-  private selectedTemplate$: BehaviorSubject<TemplateModel> = new BehaviorSubject<TemplateModel>(null);
-  private records$ : BehaviorSubject<RecordModel[]> = new BehaviorSubject<RecordModel[]>(RECORDS);
+  private templates: Template[];
+  private selectedTemplate: Template;
+  private dictionaries: DictionaryModel[];
+  private records: RecordModel[];
+  private records$ : BehaviorSubject<RecordModel[]>;
   private selectedRecord$: BehaviorSubject<RecordModel> = new BehaviorSubject<RecordModel>(null);
 
-  constructor() {
-   }
-
-  getTemplates() : Observable<TemplateModel[]>{
-    return this.templates$.asObservable();
+  constructor(
+    private manageTemplatesService: ManageTemplatesService,
+    private manageDictionariesService: ManageDictionariesService,
+    private manageEntriesService: ManageEntriesService
+  ) {
+    this.loadTemplates();
+    this.loadDictionaries();
+    this.loadRecords();
+    this.records$ = new BehaviorSubject<RecordModel[]>(this.records);
   }
 
-  getSelectedTemplate() : Observable<TemplateModel>{
-    return this.selectedTemplate$.asObservable();
+  loadTemplates() {
+    this.manageTemplatesService.readAllTemplates().subscribe(
+      response => {
+        this.templates = response.data
+        console.log("Plantillas: ")
+        console.log(this.templates);
+      }
+    );
+  }
+
+  loadDictionaries() {
+    this.manageDictionariesService.readAllDictionaries().subscribe(
+      response => {
+        this.dictionaries = response.data;
+        console.log("Diccionarios: ")
+        console.log(this.dictionaries);
+      }
+    )
+  }
+
+  loadRecords() {
+    this.manageEntriesService.readAllEntries().subscribe(
+      response => {
+        this.records = response.data;
+        console.log("Entradas: ")
+        console.log(this.records);
+      }
+    )
+  }
+
+  getTemplates() : Observable<TemplatesResponse>{
+    return this.manageTemplatesService.readAllTemplates();
+  }
+
+  getSelectedTemplate() : Observable<Template>{
+    return of(this.selectedTemplate);
   }
 
   selectTemplate(option : OptionModel) : void{
     if(option){
-      let selected = this.templates$.value.find(template => template.id === option.id);
+      let selected = this.templates.find(template => template._id === option._id);
       if(selected){
-        this.selectedTemplate$.next(selected);
+        this.selectedTemplate = selected;
       }
     }else{
-      this.selectedTemplate$.next(null);
+      this.selectedTemplate = null;
     }
   }
 
   getDictionary() : DictionaryModel{
-    return DICTIONARIES.find(dictionary => dictionary.id === this.selectedTemplate$.value.dictionary_id);
+    return this.dictionaries.find(dictionary => dictionary._id == this.selectedTemplate.dictionary);
+  }
+
+  getColumns(dictionary: DictionaryModel) : ColumnModel[]{
+    let columns : ColumnModel[] = new Array;
+    this.records.forEach(record => {
+      if (record.dictionary == dictionary._id) {
+        columns.push(
+          {
+            entry: record._id,
+            label: record.column
+          }
+        )
+      }
+    });
+    return columns
   }
 
   getRecords() : Observable<RecordModel[]>{
@@ -132,7 +188,7 @@ export class WizardService {
 
   selectRecord(row : RecordModel) : void{
     if(this.selectedRecord$.value){
-      if(this.selectedRecord$.value.id === row.id){
+      if(this.selectedRecord$.value._id === row._id){
         this.selectedRecord$.next(null);
       }else{
         this.selectedRecord$.next(row);

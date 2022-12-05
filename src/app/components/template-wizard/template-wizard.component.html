@@ -1,9 +1,11 @@
 <p>Seleccione una plantilla</p>
 <div class="grid-container">
   <app-wizard-option
-    [isSelected]="(selectedTemplate | async) !== null ? (selectedTemplate | async).id === template.id : false"
+    
     [option]="template"
     *ngFor="let template of templates | async"
     (selectedEvent)="onSelectedTemplate($event)">
   </app-wizard-option>
 </div>
+
+[isSelected]="(selectedTemplate | async) !== null ? (selectedTemplate | async)._id === (template | async)._id : false"

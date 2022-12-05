@@ -1,6 +1,6 @@
-import { ColumnModel } from "./ColumnModel";
-
 export interface RecordModel{
-  id: string;
-  value: any;
+  _id: string;
+  dictionary: string;
+  column: string;
+  token: any
 }

@@ -1,6 +1,6 @@
 <div class="summary">
   <div class="summary-container">
-    <p class="summary-title">Se generará el documento: <strong>{{ (selectedTemplate | async).title }}</strong> con la siguiente información:</p>
+    <p class="summary-title">Se generará el documento: <strong>{{ (selectedTemplate | async).name }}</strong> con la siguiente información:</p>
 
     <table class="table">
       <tbody>
@@ -8,7 +8,7 @@
         <ng-container *ngFor="let column of dictionaryColumns">
           <tr>
             <td>{{column.label}}</td>
-            <td class="italic-column" >{{ (selectedRecord | async).value[column.api_name] }}</td>
+            <td class="italic-column" >{{ (selectedRecord | async).token[column.label] }}</td>
           </tr>
         </ng-container>
 

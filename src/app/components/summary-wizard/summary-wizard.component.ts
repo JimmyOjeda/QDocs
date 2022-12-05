@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Template } from 'src/app/model/template/template';
 import { ColumnModel } from 'src/app/models/ColumnModel';
 import { RecordModel } from 'src/app/models/RecordModel';
 import { TemplateModel } from 'src/app/models/TemplateModel';
@@ -12,7 +13,7 @@ import { WizardService } from 'src/app/services/wizard/wizard.service';
 })
 export class SummaryWizardComponent implements OnInit {
 
-  selectedTemplate: Observable<TemplateModel>;
+  selectedTemplate: Observable<Template>;
   selectedRecord: Observable<RecordModel>;
   dictionaryColumns : ColumnModel[];
 
@@ -22,7 +23,8 @@ export class SummaryWizardComponent implements OnInit {
   ngOnInit(): void {
     this.selectedTemplate = this.wizardService.getSelectedTemplate();
     this.selectedRecord = this.wizardService.getSelectedRecord();
-    this.dictionaryColumns = this.wizardService.getDictionary().columns;
+    let dictionary = this.wizardService.getDictionary();
+    this.dictionaryColumns = this.wizardService.getColumns(dictionary);
   }
 
 }

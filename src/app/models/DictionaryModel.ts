@@ -1,9 +1,8 @@
 import { ColumnModel } from "./ColumnModel";
 
 export interface DictionaryModel{
-  id: String,
-  database_id: String,
-  table_id: String,
-  name: String,
+  _id: string,
+  database: string,
+  name: string,
   columns: ColumnModel[]
 }

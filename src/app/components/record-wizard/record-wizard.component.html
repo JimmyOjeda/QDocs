@@ -3,7 +3,7 @@
   <div class="card w-100">
     <table mat-table [dataSource]="(records | async)" class="mat-elevation-z8">
 
-      <ng-container [matColumnDef]="column.api_name" *ngFor="let column of dictionaryColumns">
+      <ng-container [matColumnDef]="column.label" *ngFor="let column of dictionaryColumns">
         <th
           mat-header-cell
           *matHeaderCellDef
@@ -11,7 +11,7 @@
         <td
           mat-cell
           *matCellDef="let element"
-        > {{ element.value[column.api_name] }} </td>
+        > {{ element.value[column.entry] }} </td>
       </ng-container>
 
       <tr
@@ -21,7 +21,7 @@
       <tr
         mat-row
         (click)="handleSelection(row)"
-        [class.demo-row-is-clicked]="(selectedRecord | async) === null ? false : (selectedRecord | async).id === row.id"
+        [class.demo-row-is-clicked]="(selectedRecord | async) === null ? false : (selectedRecord | async)._id === row.id"
         *matRowDef="let row; columns: columnsToDisplay;"
       ></tr>
     </table>

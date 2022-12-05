@@ -12,7 +12,8 @@ export class WizardOptionComponent implements OnInit {
   @Input() option: OptionModel;
   @Input() isSelected : boolean = false;
   @Output() selectedEvent = new EventEmitter<OptionModel>();
-
+  image = "../assets/Images/plantillas-black.png";
+  
   constructor(private wizardService : WizardService) { }
 
   ngOnInit(): void {
