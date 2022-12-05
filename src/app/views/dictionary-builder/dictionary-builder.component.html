@@ -35,13 +35,13 @@
                 </div>
 
                 <div class="d-flex justify-content-around">
-                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="databaseIdSelected" [ngModelOptions]="{standalone: true}">
+                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="databaseIdSelected" [ngModelOptions]="{standalone: true}" (change)="loadTablesFromDatabase()">
                         <option *ngFor="let database of databases" value="{{database._id}}">
                             {{database.name}}
                         </option>
                     </select>
 
-                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="tableSelected" [ngModelOptions]="{standalone: true}">
+                    <select class="w-25 dropdown rounded-pill fw-bold" [(ngModel)]="tableSelected" [ngModelOptions]="{standalone: true}" (change)="updateTokens()">
                         <option *ngFor="let table of tables" value="{{table}}">
                             {{table}}
                         </option>

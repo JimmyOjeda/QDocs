@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
 import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
+import { ManageEntriesService } from 'src/app/services/manage-entries/manage-entries.service';
 
 @Component({
   selector: 'app-dictionary-builder',
@@ -13,15 +14,7 @@ export class DictionaryBuilderComponent implements OnInit {
 
     databases: any = [];
     tables: any = [];
-    columns = [
-        "Id",
-        "Nombre",
-        "Dirección",
-        "Teléfono",
-        "Escuela",
-        "Apodo",
-        "Edad"
-    ];
+    columns: any = [];
     databaseIdSelected: string;
     tableSelected: string;
 
@@ -35,11 +28,11 @@ export class DictionaryBuilderComponent implements OnInit {
     constructor(
         private router: Router,
         private databaseService: ManageDatabasesService,
-        private dictionaryService: ManageDictionariesService) { }
+        private dictionaryService: ManageDictionariesService,
+        private entryService: ManageEntriesService) { }
 
     ngOnInit(): void {
         this.loadAllDatabases();
-        this.loadTablesFromDatabase();
     }
 
     private addFormToken(): void {
@@ -72,7 +65,7 @@ export class DictionaryBuilderComponent implements OnInit {
         };
         this.tokens.push(newToken);
         this.addFormToken();
-        this.columns = this.columns.filter(item => item !== column);
+        this.columns = this.columns.filter((item: any) => item !== column);
     }
 
     removeToken(index: number) {
@@ -93,12 +86,21 @@ export class DictionaryBuilderComponent implements OnInit {
             };
             console.log(dictionaryTokens);
 
-            // * saving dictionaries
+            // * saving dictionaries in database
             this.dictionaryService.createDictionary({
                 "name": this.DictionaryForm.value.dictionaryName,
                 "database": this.databaseIdSelected
             }).subscribe(
-                response => this.router.navigateByUrl('/dictionary-selection'),
+                (response: any) => {
+                    dictionaryTokens.tokens.forEach((token: any) => {
+                        this.entryService.createEntries(response.data._id, token)
+                        .subscribe(
+                            response => {},
+                            error => console.log(JSON.stringify(error))
+                        )
+                    });
+                    this.router.navigateByUrl('/dictionary-selection')
+                },
                 error => console.log(JSON.stringify(error))
             )
         }
@@ -119,6 +121,22 @@ export class DictionaryBuilderComponent implements OnInit {
             "Tabla 03",
             "Tabla 04"
         ];
+    }
+
+    loadColumnsFromDatabase() {
+        this.columns = [
+            "Id",
+            "Nombre",
+            "Dirección",
+            "Teléfono",
+            "Escuela",
+            "Apodo",
+            "Edad"
+        ];
+    }
+
+    updateTokens() {
+        this.loadColumnsFromDatabase();
     }
 
 }
