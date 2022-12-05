@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Template } from 'src/app/model/template/template';
 import { ManageTemplatesService } from 'src/app/services/manage-templates/manage-templates.service';
 import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
@@ -16,18 +17,31 @@ export class TemplateSelectionComponent implements OnInit {
   templateForm = new FormGroup({
     name: new FormControl('', Validators.required),
     file: new FormControl('', Validators.required),
-    filename: new FormControl('', Validators.required),
-    fileSource: new FormControl('', Validators.required)
+    filename: new FormControl('', Validators.required)
   });
+
+  file: File;
 
   modalTitle: string = "Crear plantilla";
 
+  templates: Template[] = [];
+
   constructor(
+    private router: Router,
     public selectOptionService: SelectOptionService,
     public manageTemplatesService: ManageTemplatesService  
   ) { }
 
   ngOnInit(): void {
+    this.loadAllTemplates();
+  }
+
+  loadAllTemplates() {
+    this.manageTemplatesService.readAllTemplates()
+      .subscribe(
+        response => this.templates = response.data,
+        error => console.log(JSON.stringify(error))
+      );
   }
 
   prepareModalForNewTemplate () {
@@ -36,55 +50,65 @@ export class TemplateSelectionComponent implements OnInit {
     this.selectOptionService.updateSelectedOption(-1);
   }
 
-  loadTemplateData (id: number) {
+  loadTemplateData (id: string) {
     this.modalTitle = "Editar plantilla";
     this.templateForm.reset();
     let template = this.manageTemplatesService.readTemplate(id);
 
     if (template) {
-      this.templateForm.patchValue({
-        name: template.name,
-        filename: template.filename
-      })
+      template.subscribe(
+        response => {
+          this.templateForm.patchValue({
+            name: response.data.name
+          })
+        }
+      )
+      
     }   
   }
 
   saveTemplateConfiguration () {
     let template = {
-      id : this.selectOptionService.optionSelected,
+      _id : this.selectOptionService.optionSelected,
       name : this.templateForm.value.name,
-      file : this.templateForm.value.file,
-      filename : this.templateForm.value.filename,
-      fileSource : this.templateForm.value.fileSource
+      file : this.file
     }
-    this.manageTemplatesService.updateTemplate(template);
+    this.manageTemplatesService.updateTemplate(template)
+      .subscribe(
+        response => this.loadAllTemplates(),
+        error => console.log(JSON.stringify(error))
+      )
   }
 
   addTemplateConfiguration () {
     this.manageTemplatesService.createTemplate({
-      id: this.manageTemplatesService.readAllTemplates.length+1,
-      name: this.templateForm.value.name,
-      file : this.templateForm.value.file,
-      filename: this.templateForm.value.filename,
-      fileSource : "enlace"
-    });
+      dictionary : "638714dc703736c900efabd0",
+      name: "Nombre prueba",
+      file: this.file
+    }).subscribe(
+      response => this.loadAllTemplates(),
+      error => console.log(JSON.stringify(error))
+    )
   }
 
   removeTemplateConfiguration () {
-    this.manageTemplatesService.deleteTemplate(this.selectOptionService.optionSelected);
+    this.manageTemplatesService.deleteTemplate(this.selectOptionService.optionSelected)
+            .subscribe(
+                response => this.loadAllTemplates(),
+                error => console.log(JSON.stringify(error))
+            )
   }
 
   onFileChange(event: any) {
     if (event?.target?.files.length > 0) {
       const file = event.target.files[0];
       this.templateForm.patchValue({
-        filename: file.name,
-        fileSource: file
+        filename: file.name
       });
+      this.file = file;
       console.log(file);
       console.log(file.name);
     }
-    
   }
 
   submit(){

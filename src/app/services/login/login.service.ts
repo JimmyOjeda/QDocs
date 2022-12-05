@@ -53,6 +53,9 @@ export class LoginService {
 
     loginBackendDummy (email: string, password: string) {
         let res = this.getResponseDummy();
+        if (email == "jimmy@qdocs.com") {
+            res.role = "admin"
+        }
         return res;
     }
 
@@ -66,7 +69,7 @@ export class LoginService {
         let res = {
             auth: true,
             token: "nuevotokensito",
-            role: "admin"
+            role: "agent"
         }
         return res;
     }

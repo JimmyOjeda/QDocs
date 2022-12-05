@@ -1,7 +1,5 @@
 export interface Template {
-    id : number,
+    _id : string,
     name: string,
-    file : any,
-    filename: string,
-    fileSource : any
+    dictionary: string
 }

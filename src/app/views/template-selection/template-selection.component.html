@@ -19,8 +19,8 @@
       [option]="template" 
       data-bs-toggle="modal"
       data-bs-target="#add-modal"
-      (click)="loadTemplateData(template.id)"
-      *ngFor="let template of manageTemplatesService.readAllTemplates()">
+      (click)="loadTemplateData(template._id)"
+      *ngFor="let template of templates">
     
     </app-removable-option>
   </div>
