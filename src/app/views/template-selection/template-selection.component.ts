@@ -29,7 +29,7 @@ export class TemplateSelectionComponent implements OnInit {
   constructor(
     private router: Router,
     public selectOptionService: SelectOptionService,
-    public manageTemplatesService: ManageTemplatesService  
+    public manageTemplatesService: ManageTemplatesService
   ) { }
 
   ngOnInit(): void {
@@ -63,8 +63,8 @@ export class TemplateSelectionComponent implements OnInit {
           })
         }
       )
-      
-    }   
+
+    }
   }
 
   saveTemplateConfiguration () {
@@ -83,7 +83,7 @@ export class TemplateSelectionComponent implements OnInit {
   addTemplateConfiguration () {
     this.manageTemplatesService.createTemplate({
       dictionary : "638714dc703736c900efabd0",
-      name: "Nombre prueba",
+      name: this.templateForm.value.name,
       file: this.file
     }).subscribe(
       response => this.loadAllTemplates(),
@@ -114,7 +114,7 @@ export class TemplateSelectionComponent implements OnInit {
   submit(){
     const formData = new FormData();
     formData.append('file', this.templateForm.get('fileSource')?.value!);
-   
+
     /*
     this.http.post('http://localhost:8001/upload.php', formData)
       .subscribe(res => {

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Response } from 'src/app/model/response'; 
+import { Response } from 'src/app/model/response';
 import { TemplatesResponse } from 'src/app/model/template/template-response';
 import { Template } from 'src/app/model/template/template';
 import { TemplateResponse } from 'src/app/model/template/templates-response';
@@ -20,25 +20,21 @@ export class ManageTemplatesService {
     });
 
     constructor(private http: HttpClient) { }
-    
+
     readAllTemplates (): Observable<TemplatesResponse> {
         return this.http.get<TemplatesResponse>(this.URL, {headers: this.reqHeader});
     }
 
     createTemplate (template: any): Observable<Response> {
+        console.log(template);
         let reqHeader = new HttpHeaders({
-            'Content-Type': 'application/json',
+            //'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${this.token}`
         });
         let body = new FormData();
         body.append('dictionary',"638714dc703736c900efabd0");
-        body.append('name', "Intento de archivo");
-        body.append('file', "/C:/Users/LCP/Downloads/Examen_2021.pdf");
-        /*const body = {
-            dictionary: "638714dc703736c900efabd0",
-            name: "Intento de archivo",
-            file: "/C:/Users/LCP/Downloads/Examen_2021.pdf"
-        }*/
+        body.append('name', template.name);
+        body.append('file', template.file);
         return this.http.post<any>(this.URL, body, { headers: reqHeader });
     }
 
