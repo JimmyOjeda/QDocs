@@ -110,15 +110,15 @@ export class WizardService {
     private manageEntriesService: ManageEntriesService
   ) {
     this.loadTemplates();
-    /* this.loadDictionaries();
-    this.loadRecords(); */
+    
     this.records$ = new BehaviorSubject<RecordModel[]>(this.records);
   }
 
   loadTemplates() {
     this.manageTemplatesService.readAllTemplates().subscribe(
       response => {
-        this.templates = response.data
+        this.templates = response.data;
+        console.log(this.templates);
       }
     );
   }
