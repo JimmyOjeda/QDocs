@@ -30,7 +30,7 @@ export class ManageDictionariesService {
         return this.http.post<any>(this.URL, body, { headers: this.reqHeader });
     }
 
-    readDictionary (id: number): Observable<Response> {
+    readDictionary (id: String): Observable<Response> {
         return this.http.get<Response>(
             `${this.URL}/${id}`, {headers: this.reqHeader}
         );

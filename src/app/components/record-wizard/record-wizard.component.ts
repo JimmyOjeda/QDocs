@@ -21,10 +21,13 @@ export class RecordWizardComponent implements OnInit {
 
   ngOnInit(): void {
     this.records = this.wizardService.getRecords();
+    console.log(this.records);
     this.selectedRecord = this.wizardService.getSelectedRecord();
     let dictionary = this.wizardService.getDictionary();
-    this.dictionaryColumns = this.wizardService.getColumns(dictionary);
-    this.columnsToDisplay = this.dictionaryColumns.map(column => column.label);
+    //this.dictionaryColumns = this.wizardService.getColumns(dictionary);
+    this.dictionaryColumns = dictionary.entries;
+    this.columnsToDisplay = this.dictionaryColumns.map(entry => entry.column);
+    console.log(this.dictionaryColumns);
   }
 
   handleSelection(row : RecordModel){

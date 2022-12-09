@@ -31,7 +31,7 @@ export class DictionaryViewComponent implements OnInit {
         .subscribe(
             response => {
                 this.entries = response.data.filter(
-                    entry => entry.dictionary === this.dictionaryIdSelected
+                    (entry: any) => entry.dictionary === this.dictionaryIdSelected
                 );
             },
             error => console.log(JSON.stringify(error))

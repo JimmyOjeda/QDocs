@@ -1,4 +1,4 @@
 export interface Response {
     success: boolean,
-    data: any[]
+    data: any
 }

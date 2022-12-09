@@ -1,4 +1,4 @@
 export interface ColumnModel{
-  entry: string,
-  label: string
+  column: string,
+  token: string
 }

@@ -3,5 +3,5 @@ import { DictionaryModel } from "./DictionaryModel";
 export interface TemplateModel{
   id : String;
   title : String;
-  dictionary_id: String;
+  dictionary: String;
 }

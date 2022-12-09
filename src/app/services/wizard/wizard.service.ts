@@ -1,3 +1,4 @@
+import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { DictionaryModel } from 'src/app/models/DictionaryModel';
@@ -12,8 +13,9 @@ import { TemplatesResponse } from 'src/app/model/template/template-response';
 import { ManageDictionariesService } from '../manage-dictionaries/manage-dictionaries.service';
 import { ManageEntriesService } from '../manage-entries/manage-entries.service';
 import { ColumnModel } from 'src/app/models/ColumnModel';
+import { Database } from 'src/app/model/database/database';
 
-const TEMPLATES = [
+/* const TEMPLATES = [
     {
       "id": "1",
       "title" : "Plantilla 1",
@@ -85,7 +87,7 @@ const RECORDS = [
       'edad' : 22
     }
   },
-];
+]; */
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +96,9 @@ export class WizardService {
 
   private templates: Template[];
   private selectedTemplate: Template;
-  private dictionaries: DictionaryModel[];
+  private database : Database;
+  //private dictionaries: DictionaryModel[];
+  private dictionary : DictionaryModel;
   private records: RecordModel[];
   private records$ : BehaviorSubject<RecordModel[]>;
   private selectedRecord$: BehaviorSubject<RecordModel> = new BehaviorSubject<RecordModel>(null);
@@ -102,11 +106,12 @@ export class WizardService {
   constructor(
     private manageTemplatesService: ManageTemplatesService,
     private manageDictionariesService: ManageDictionariesService,
+    private manageDatabasesService : ManageDatabasesService,
     private manageEntriesService: ManageEntriesService
   ) {
     this.loadTemplates();
-    this.loadDictionaries();
-    this.loadRecords();
+    /* this.loadDictionaries();
+    this.loadRecords(); */
     this.records$ = new BehaviorSubject<RecordModel[]>(this.records);
   }
 
@@ -114,20 +119,22 @@ export class WizardService {
     this.manageTemplatesService.readAllTemplates().subscribe(
       response => {
         this.templates = response.data
-        console.log("Plantillas: ")
-        console.log(this.templates);
       }
     );
   }
 
-  loadDictionaries() {
-    this.manageDictionariesService.readAllDictionaries().subscribe(
-      response => {
-        this.dictionaries = response.data;
-        console.log("Diccionarios: ")
-        console.log(this.dictionaries);
-      }
-    )
+  loadDatabase() {
+    this.manageDictionariesService.readDictionary(this.selectedTemplate.dictionary).subscribe(
+        response => {
+            this.dictionary = response.data
+
+            this.manageDatabasesService.getRecords(this.dictionary.database).subscribe(
+                response => {
+                  this.records$.next(response.data);
+                }
+              )
+        }
+    );
   }
 
   loadRecords() {
@@ -153,6 +160,7 @@ export class WizardService {
       let selected = this.templates.find(template => template._id === option._id);
       if(selected){
         this.selectedTemplate = selected;
+        this.loadDatabase();
       }
     }else{
       this.selectedTemplate = null;
@@ -160,20 +168,21 @@ export class WizardService {
   }
 
   getDictionary() : DictionaryModel{
-    return this.dictionaries.find(dictionary => dictionary._id == this.selectedTemplate.dictionary);
+    //return this.dictionaries.find(dictionary => dictionary._id == this.selectedTemplate.dictionary);
+    return this.dictionary;
   }
 
   getColumns(dictionary: DictionaryModel) : ColumnModel[]{
     let columns : ColumnModel[] = new Array;
     this.records.forEach(record => {
-      if (record.dictionary == dictionary._id) {
+      /* if (record.dictionary == dictionary._id) {
         columns.push(
           {
-            entry: record._id,
-            label: record.column
+            column: record._id,
+            token: record.column
           }
         )
-      }
+      } */
     });
     return columns
   }

@@ -16,6 +16,7 @@ export class SummaryWizardComponent implements OnInit {
   selectedTemplate: Observable<Template>;
   selectedRecord: Observable<RecordModel>;
   dictionaryColumns : ColumnModel[];
+  record : any;
 
   constructor(private wizardService : WizardService) {
    }
@@ -23,8 +24,14 @@ export class SummaryWizardComponent implements OnInit {
   ngOnInit(): void {
     this.selectedTemplate = this.wizardService.getSelectedTemplate();
     this.selectedRecord = this.wizardService.getSelectedRecord();
+    this.selectedRecord.subscribe(
+        record => {
+            this.record = record
+        }
+    );
     let dictionary = this.wizardService.getDictionary();
-    this.dictionaryColumns = this.wizardService.getColumns(dictionary);
+    //this.dictionaryColumns = this.wizardService.getColumns(dictionary);
+    this.dictionaryColumns = dictionary.entries;
   }
 
 }

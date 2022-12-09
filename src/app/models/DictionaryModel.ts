@@ -4,5 +4,5 @@ export interface DictionaryModel{
   _id: string,
   database: string,
   name: string,
-  columns: ColumnModel[]
+  entries: ColumnModel[]
 }

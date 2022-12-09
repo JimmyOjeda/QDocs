@@ -5,10 +5,10 @@
     <table class="table">
       <tbody>
 
-        <ng-container *ngFor="let column of dictionaryColumns">
+        <ng-container *ngFor="let entry of dictionaryColumns">
           <tr>
-            <td>{{column.label}}</td>
-            <td class="italic-column" >{{ (selectedRecord | async).token[column.label] }}</td>
+            <td>{{entry.column}}</td>
+            <td class="italic-column" >{{ record[entry.column] }}</td>
           </tr>
         </ng-container>
 

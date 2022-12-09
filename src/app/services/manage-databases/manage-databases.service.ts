@@ -1,3 +1,4 @@
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,7 +21,7 @@ export class ManageDatabasesService {
 
     databases: Database[] = [];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private dictionariesService : ManageDictionariesService) { }
 
     readAllDatabases(): Observable<Response> {
         return this.http.get<Response>(this.URL, {headers: this.reqHeader});
@@ -52,6 +53,10 @@ export class ManageDatabasesService {
 
     deleteDatabase (id: number) {
         return this.http.delete<Response>(`${this.URL}/${id}`, {headers: this.reqHeader});
+    }
+
+    getRecords (database : String) : Observable<Response> {
+        return this.http.get<Response>(`${this.URL}/${database}/records`, {headers: this.reqHeader});
     }
 
 }
