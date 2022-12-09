@@ -43,6 +43,17 @@
           class="form-control" 
           formControlName="name"
         >
+
+        <p class="field-title">
+          Diccionario Utilizado:
+        </p>
+        <select 
+          class="form-control" 
+          formControlName="dictionary"  
+        >
+          <option [value]="dictionary._id" *ngFor="let dictionary of dictionaries">{{dictionary.name}}</option>
+        </select>
+
         <p class="field-title">
             Archivo de plantilla:
         </p>

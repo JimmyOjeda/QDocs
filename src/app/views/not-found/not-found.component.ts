@@ -18,7 +18,7 @@ export class NotFoundComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.loginService.loadLoginDummy(this.cookieService.get('tokenCookie'));
+        this.loginService.loadLogin();
     }
 
     redirectHome () {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Template } from 'src/app/model/template/template';
+import { DictionaryModel } from 'src/app/models/DictionaryModel';
+import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 import { ManageTemplatesService } from 'src/app/services/manage-templates/manage-templates.service';
 import { SelectOptionService } from 'src/app/services/select-option/select-option.service';
 
@@ -12,10 +14,14 @@ import { SelectOptionService } from 'src/app/services/select-option/select-optio
 })
 export class TemplateSelectionComponent implements OnInit {
 
+  dictionarySelected : string;
+  dictionaries : DictionaryModel[];
+
   imageSource = "../assets/Images/plantillas-black.png";
 
   templateForm = new FormGroup({
     name: new FormControl('', Validators.required),
+    dictionary: new FormControl('', Validators.required),
     file: new FormControl('', Validators.required),
     filename: new FormControl('', Validators.required)
   });
@@ -29,11 +35,13 @@ export class TemplateSelectionComponent implements OnInit {
   constructor(
     private router: Router,
     public selectOptionService: SelectOptionService,
-    public manageTemplatesService: ManageTemplatesService
+    public manageTemplatesService: ManageTemplatesService,
+    public manageDictionariesService : ManageDictionariesService
   ) { }
 
   ngOnInit(): void {
     this.loadAllTemplates();
+    this.loadAllDictionaries();
   }
 
   loadAllTemplates() {
@@ -42,6 +50,15 @@ export class TemplateSelectionComponent implements OnInit {
         response => this.templates = response.data,
         error => console.log(JSON.stringify(error))
       );
+  }
+
+  loadAllDictionaries() {
+    this.manageDictionariesService.readAllDictionaries().subscribe(
+      response => {
+        this.dictionaries = response.data
+        console.log(this.dictionaries);
+      }
+    )
   }
 
   prepareModalForNewTemplate () {
@@ -59,7 +76,8 @@ export class TemplateSelectionComponent implements OnInit {
       template.subscribe(
         response => {
           this.templateForm.patchValue({
-            name: response.data.name
+            name: response.data.name,
+            dictionary: response.data.dictionary
           })
         }
       )
@@ -71,6 +89,7 @@ export class TemplateSelectionComponent implements OnInit {
     let template = {
       _id : this.selectOptionService.optionSelected,
       name : this.templateForm.value.name,
+      dictionary: this.templateForm.value.dictionary,
       file : this.file
     }
     this.manageTemplatesService.updateTemplate(template)
@@ -82,7 +101,7 @@ export class TemplateSelectionComponent implements OnInit {
 
   addTemplateConfiguration () {
     this.manageTemplatesService.createTemplate({
-      dictionary : "638714dc703736c900efabd0",
+      dictionary : this.templateForm.value.dictionary,
       name: this.templateForm.value.name,
       file: this.file
     }).subscribe(
@@ -93,10 +112,10 @@ export class TemplateSelectionComponent implements OnInit {
 
   removeTemplateConfiguration () {
     this.manageTemplatesService.deleteTemplate(this.selectOptionService.optionSelected)
-            .subscribe(
-                response => this.loadAllTemplates(),
-                error => console.log(JSON.stringify(error))
-            )
+      .subscribe(
+        response => this.loadAllTemplates(),
+        error => console.log(JSON.stringify(error))
+      )
   }
 
   onFileChange(event: any) {
@@ -109,19 +128,6 @@ export class TemplateSelectionComponent implements OnInit {
       console.log(file);
       console.log(file.name);
     }
-  }
-
-  submit(){
-    const formData = new FormData();
-    formData.append('file', this.templateForm.get('fileSource')?.value!);
-
-    /*
-    this.http.post('http://localhost:8001/upload.php', formData)
-      .subscribe(res => {
-        console.log(res);
-        alert('Uploaded Successfully.');
-      })
-      */
   }
 
 }

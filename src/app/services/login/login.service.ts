@@ -1,31 +1,62 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { Login } from 'src/app/models/login';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
+    private URL = 'http://localhost:5001/api/v1/auth/login';
 
-    constructor(private router:Router, private cookieService: CookieService) {}
+    private reqHeader = new HttpHeaders({
+        'Content-Type': 'application/json'
+    });
+
+    constructor(
+        private router:Router, 
+        private cookieService: CookieService,
+        private http: HttpClient
+    ) {}
 
     token: string;
     role: string;
 
     ngOnInit(): void {
-        if (this.cookieService.check('tokenCookie')) {
-            this.loadLoginDummy(this.cookieService.get('tokenCookie'));
+        this.loadLogin();
+    }
+
+    login (email: string, password: string){
+        this.backendLogin(email, password).subscribe(
+            response => {
+                if (response.success) {
+                    this.token = response.token;
+                    this.cookieService.set("tokenCookie",this.token);
+                    this.role = response.role;
+                    this.cookieService.set("roleCookie", this.role);
+                    this.redirect(this.role /*response.role*/);
+                    console.log(response);
+                }
+            }
+        )
+    }
+
+    loadLogin () {
+        if (this.cookieService.check('tokenCookie') && this.cookieService.check('roleCookie')) {
+            this.token = this.cookieService.get('tokenCookie');
+            this.role = this.cookieService.get('roleCookie');
+            this.redirect(this.role);
         }
     }
 
-    login (email: string, password: string) {
-        const res = this.loginBackendDummy(email, password);
-        if(res.auth){
-            this.token = res.token;
-            this.cookieService.set("tokenCookie",this.token);
-            this.role = res.role;
-            this.redirect(res.role);
+    backendLogin(email: string, password: string): Observable<Login> {
+        const body = {
+            email: email,
+            password: password
         }
+        return this.http.post<Login>(`${this.URL}`,body, {headers: this.reqHeader});
     }
 
     getToken () {
@@ -35,6 +66,7 @@ export class LoginService {
     logout () {
         this.token="";
         this.cookieService.delete("tokenCookie");
+        this.cookieService.delete("roleCookie");
         this.router.navigate(['/']);
     }
 
@@ -49,28 +81,5 @@ export class LoginService {
                 break;
             }
         };
-    }
-
-    loginBackendDummy (email: string, password: string) {
-        let res = this.getResponseDummy();
-        if (email == "jimmy@qdocs.com") {
-            res.role = "admin"
-        }
-        return res;
-    }
-
-    loadLoginDummy (token: string) {
-        let res = this.getResponseDummy();
-        this.token = res.token;
-        this.role = res.role;
-    }
-
-    getResponseDummy () {
-        let res = {
-            auth: true,
-            token: "nuevotokensito",
-            role: "agent"
-        }
-        return res;
     }
 }

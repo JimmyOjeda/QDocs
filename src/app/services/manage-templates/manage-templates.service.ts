@@ -32,7 +32,7 @@ export class ManageTemplatesService {
             'Authorization': `Bearer ${this.token}`
         });
         let body = new FormData();
-        body.append('dictionary',"638714dc703736c900efabd0");
+        body.append('dictionary', template.dictionary);
         body.append('name', template.name);
         body.append('file', template.file);
         return this.http.post<any>(this.URL, body, { headers: reqHeader });
