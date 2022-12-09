@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Login } from 'src/app/models/Login';
+import { Login } from 'src/app/models/login';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +34,7 @@ export class LoginService {
                 if (response.success) {
                     this.token = response.token;
                     this.cookieService.set("tokenCookie",this.token);
-                    this.role = 'agent' /*response.role*/;
+                    this.role = response.role;
                     this.cookieService.set("roleCookie", this.role);
                     this.redirect(this.role /*response.role*/);
                     console.log(response);
