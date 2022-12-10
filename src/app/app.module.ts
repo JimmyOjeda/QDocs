@@ -55,6 +55,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LoginComponent } from './views/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { QrComponent } from './views/qr/qr/qr.component';
+import { NgxKjuaModule } from 'ngx-kjua';
 
 registerLocaleData(localeMx);
 
@@ -95,6 +97,7 @@ registerLocaleData(localeMx);
     CalendarViewComponent,
     LoginComponent,
     NotFoundComponent,
+    QrComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +119,8 @@ registerLocaleData(localeMx);
         provide: DateAdapter,
         useFactory: adapterFactory
     }),
-    HttpClientModule
+    HttpClientModule,
+    NgxKjuaModule
   ],
   providers: [WizardService, MatFormField, CookieService],
   bootstrap: [AppComponent]

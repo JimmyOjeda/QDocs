@@ -14,6 +14,7 @@ import { GenerateDocsCompleteComponent } from './views/generate-docs-complete/ge
 import { GenerateDocsWizardComponent } from './views/generate-docs-wizard/generate-docs-wizard.component';
 import { LoginComponent } from './views/login/login.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { QrComponent } from './views/qr/qr/qr.component';
 import { TemplateSelectionComponent } from './views/template-selection/template-selection.component';
 
 const routes: Routes = [
@@ -69,6 +70,10 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarViewComponent
+  },
+  {
+    path: 'qr',
+    component: QrComponent
   },
   {
     path: '**',

@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "^14.2.0",
     "@angular/cdk": "^14.2.5",
     "@angular/common": "^14.2.0",
@@ -25,8 +26,10 @@
     "date-fns": "^2.29.3",
     "jquery": "^3.6.1",
     "ngx-cookie-service": "^15.0.0",
+    "ngx-kjua": "^2.0.2",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",
+    "save": "^2.9.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
