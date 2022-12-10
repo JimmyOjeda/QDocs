@@ -1,3 +1,8 @@
+/**
+  * Servicio que permite interactuar con las plantillas almacenadas
+  * en el backend.
+  *
+*/
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -21,10 +26,25 @@ export class ManageTemplatesService {
 
     constructor(private http: HttpClient) { }
 
+    /**
+     * Realiza la lectura de todas las plantillas
+     * almacenadas en el backend mediante el consumo del endpoint
+     * proveído por el mismo.
+     *
+     * @return Observable<Response> Un observable de la respuesta del
+     * backend, la cual contiene las plantillas almacenadas.
+    */
     readAllTemplates (): Observable<TemplatesResponse> {
         return this.http.get<TemplatesResponse>(this.URL, {headers: this.reqHeader});
     }
 
+    /**
+     * Crea una nueva plantilla en el backend.
+     *
+     * @param template Un objeto con la plantilla para almacenar en el backend.
+     * @return Observable<Response> Un observable de la respuesta del
+     * backend, la cual contiene la plantilla almacenada.
+    */
     createTemplate (template: any): Observable<Response> {
         console.log(template);
         let reqHeader = new HttpHeaders({
@@ -38,12 +58,26 @@ export class ManageTemplatesService {
         return this.http.post<any>(this.URL, body, { headers: reqHeader });
     }
 
+     /**
+     * Realiza una consulta de una plantilla en el backend.
+     *
+     * @param id El id de la plantilla a consultar.
+     * @return Observable<Response> Un observable de la respuesta del
+     * backend, la cual contiene la plantilla consultada.
+    */
     readTemplate (id: string): Observable<TemplateResponse> {
         return this.http.get<TemplateResponse>(
             `${this.URL}/${id}`, {headers: this.reqHeader}
         );
     }
 
+    /**
+     * Realiza una actualización de una plantilla almacenada en el backend.
+     *
+     * @param template La información nueva de la plantilla por actualizar.
+     * @return Observable<Response> Un observable de la respuesta del
+     * backend, la cual contiene la plantilla actualizada.
+    */
     updateTemplate (template: any): Observable<TemplateResponse> {
         const body = {
             name: template.name
@@ -53,6 +87,11 @@ export class ManageTemplatesService {
         );
     }
 
+    /**
+     * Realiza la eliminación de una plantilla en el backend.
+     *
+     * @param id El id de la plantilla a eliminar.
+    */
     deleteTemplate (id: number) {
         return this.http.delete<Response>(
             `${this.URL}/${id}`, {headers: this.reqHeader}

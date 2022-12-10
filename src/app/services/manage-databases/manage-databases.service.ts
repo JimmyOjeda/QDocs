@@ -2,8 +2,7 @@
   * Servicio que permite interactuar con las conexiones de
   * bases de datos almacenadas en el backend.
   *
-  * @author Jimmy Ojeda
-  */
+*/
 import { ManageDictionariesService } from 'src/app/services/manage-dictionaries/manage-dictionaries.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -44,7 +43,7 @@ export class ManageDatabasesService {
     /**
      * Crea una nueva conexión a base de datos en el backend.
      *
-     * @param database Un objeto con la configuración de la conexión a 
+     * @param database Un objeto con la configuración de la conexión a
      * base de datos a crear.
      * @return Observable<Response> Un observable de la respuesta del
      * backend, la cual contiene la conexión de bases de datos creada.
@@ -73,7 +72,8 @@ export class ManageDatabasesService {
     /**
      * Realiza una actualización de una configuacion a base de datos en el backend.
      *
-     * @param database El id de la conexión a base de datos a actualizar.
+     * @param database La información nueva de la configuración
+     * de base de datos por actualizar.
      * @return Observable<Response> Un observable de la respuesta del
      * backend, la cual contiene la configuración de la conexión actualizada.
     */
@@ -90,7 +90,7 @@ export class ManageDatabasesService {
     /**
      * Realiza la eliminación de una configuacion a base de datos en el backend.
      *
-     * @id El id de la conexión a base de datos a eliminar.
+     * @param id El id de la conexión a base de datos a eliminar.
     */
     deleteDatabase (id: number) {
         return this.http.delete<Response>(`${this.URL}/${id}`, {headers: this.reqHeader});
