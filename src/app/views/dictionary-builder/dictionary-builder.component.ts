@@ -13,6 +13,7 @@ import { ManageEntriesService } from 'src/app/services/manage-entries/manage-ent
 export class DictionaryBuilderComponent implements OnInit {
 
     databases: any = [];
+    keys: any [];
     tables: any = [];
     columns: any = [];
     databaseIdSelected: string;
@@ -33,6 +34,9 @@ export class DictionaryBuilderComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadAllDatabases();
+        /*this.databaseService.getRecords(this.databaseIdSelected).subscribe(
+            response => console.log(response.data)
+        )*/
     }
 
     private addFormToken(): void {
@@ -123,20 +127,14 @@ export class DictionaryBuilderComponent implements OnInit {
         ];
     }
 
-    loadColumnsFromDatabase() {
-        this.columns = [
-            "Id",
-            "Nombre",
-            "Dirección",
-            "Teléfono",
-            "Escuela",
-            "Apodo",
-            "Edad"
-        ];
+    loadColumnsFromDatabase(database: string) {
+        this.databaseService.getRecords(database).subscribe(
+            response => this.columns = Object.keys(response.data[0])
+        )
     }
 
     updateTokens() {
-        this.loadColumnsFromDatabase();
+        this.loadColumnsFromDatabase(this.databaseIdSelected);
     }
 
 }

@@ -1,3 +1,9 @@
+ /**
+  * Servicio que permite al sistema realizar el proceso de autenticación
+  * mediante la comprobación de usuario usando un endpoint del backend.
+  *
+  * @author Jimmy Ojeda
+  */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,6 +21,10 @@ export class LoginService {
         'Content-Type': 'application/json'
     });
 
+    /**
+     * Inicia los servicios necesarios para su correcto funcionamiento.
+     *
+    */
     constructor(
         private router:Router, 
         private cookieService: CookieService,
@@ -28,6 +38,15 @@ export class LoginService {
         this.loadLogin();
     }
 
+    /**
+     * Realiza la comprobación de usuario mediante el uso de
+     * la función backendLogin, genera las cookies necesarias
+     * para la sesión local y guarda los datos retornados por la
+     * función backendLogin.
+     *
+     * @param email El correo proporcionado por el usuario.
+     * @param password La contraseña proporcionada por el usuario.
+    */
     login (email: string, password: string){
         this.backendLogin(email, password).subscribe(
             response => {
@@ -43,6 +62,10 @@ export class LoginService {
         )
     }
 
+    /**
+     * Carga la última sesión iniciada mediante la lectura de cookies
+     * creadas en el login.
+    */
     loadLogin () {
         if (this.cookieService.check('tokenCookie') && this.cookieService.check('roleCookie')) {
             this.token = this.cookieService.get('tokenCookie');
@@ -51,6 +74,14 @@ export class LoginService {
         }
     }
 
+    /**
+     * Realiza el consumo del endpoint proveido por el backend
+     * para realizar la autentación de usuario.
+     *
+     * @param email El email proporcionado por el usuario.
+     * @param password La contraseña proporicionado por el usuario.
+     * @return Observable<Login> Si obtiene una respuesta 200 ok del backend.
+    */
     backendLogin(email: string, password: string): Observable<Login> {
         const body = {
             email: email,
@@ -59,10 +90,10 @@ export class LoginService {
         return this.http.post<Login>(`${this.URL}`,body, {headers: this.reqHeader});
     }
 
-    getToken () {
-        return this.cookieService.get("tokenCookie");
-    }
-
+    /**
+     * Finaliza la sesión local mediante la eliminación de las cookies
+     * generadas en el Login.
+    */
     logout () {
         this.token="";
         this.cookieService.delete("tokenCookie");
@@ -70,6 +101,12 @@ export class LoginService {
         this.router.navigate(['/']);
     }
 
+    /**
+     * Realiza una redirección mediante el uso de routerlink.
+     * El usuario será redirigido al inicio correspondiente a su rol.
+     *
+     * @param titulo El rol del usuario a redirigir.
+    */
     redirect (role: string) {
         switch(role) {
             case 'admin': {
