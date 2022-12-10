@@ -16,7 +16,7 @@ export class DatabaseSelectionComponent implements OnInit {
   databaseForm = new FormGroup({
     name: new FormControl('', Validators.required),
     direction: new FormControl('', Validators.required),
-    port: new FormControl('', Validators.required),
+    table: new FormControl('', Validators.required),
     user: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
@@ -48,7 +48,7 @@ export class DatabaseSelectionComponent implements OnInit {
     this.selectOptionService.optionSelected = -1;
   }
 
-  loadDatabaseData (id: number) {
+  loadDatabaseData (id: string) {
     this.modalTitle = "Editar conexión";
     this.databaseForm.reset();
     this.manageDatabasesService.readDatabase(id)
@@ -57,7 +57,7 @@ export class DatabaseSelectionComponent implements OnInit {
                 this.databaseForm.patchValue({
                     name: response.data.name,
                     direction: response.data.url,
-                    port: "",
+                    table: response.data.table,
                     user: response.data.username,
                     password: response.data.password
                 })
@@ -71,7 +71,7 @@ export class DatabaseSelectionComponent implements OnInit {
       id: this.selectOptionService.optionSelected,
       name: this.databaseForm.value.name,
       direction: this.databaseForm.value.direction,
-      port: this.databaseForm.value.port,
+      table: this.databaseForm.value.table,
       user: this.databaseForm.value.user,
       password: this.databaseForm.value.password
     }
@@ -87,7 +87,7 @@ export class DatabaseSelectionComponent implements OnInit {
       id: this.manageDatabasesService.readAllDatabases.length+1,
       name: this.databaseForm.value.name!,
       direction: this.databaseForm.value.direction!,
-      port: this.databaseForm.value.port!,
+      table: this.databaseForm.value.table!,
       user: this.databaseForm.value.user!,
       password: this.databaseForm.value.password!
     }).subscribe(

@@ -66,7 +66,7 @@ export class ManageDatabasesService {
      * @return Observable<Response> Un observable de la respuesta del
      * backend, la cual contiene la configuración de la conexión consultada.
     */
-    readDatabase (id: number): Observable<Response> {
+    readDatabase (id: string): Observable<Response> {
         return this.http.get<Response>(`${this.URL}/${id}`, {headers: this.reqHeader});
     }
 

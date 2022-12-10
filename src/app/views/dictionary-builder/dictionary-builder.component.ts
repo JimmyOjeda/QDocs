@@ -119,13 +119,15 @@ export class DictionaryBuilderComponent implements OnInit {
     }
 
     loadTablesFromDatabase() {
-        this.tables = [
-            "Tabla 01",
-            "Tabla 02",
-            "Tabla 03",
-            "Tabla 04"
-        ];
+        this.databaseService.readDatabase(this.databaseIdSelected).subscribe(
+            response => {
+                this.tables = [response.data.table];
+                this.tableSelected = response.data.table;
+                this.updateTokens();
+            }
+        )
     }
+    
 
     loadColumnsFromDatabase(database: string) {
         this.databaseService.getRecords(database).subscribe(
