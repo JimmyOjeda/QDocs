@@ -1,3 +1,7 @@
+/**
+  * Servicio que permite interactuar con la guía de generación de documentos.
+  *
+*/
 import { ManageDatabasesService } from 'src/app/services/manage-databases/manage-databases.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -110,10 +114,14 @@ export class WizardService {
     private manageEntriesService: ManageEntriesService
   ) {
     this.loadTemplates();
-    
+
     this.records$ = new BehaviorSubject<RecordModel[]>(this.records);
   }
 
+  /**
+  * Servicio que obtiene todas las plantillas seleccionadas por el usuario.
+  *
+  */
   loadTemplates() {
     this.manageTemplatesService.readAllTemplates().subscribe(
       response => {
@@ -123,6 +131,10 @@ export class WizardService {
     );
   }
 
+  /**
+  * Servicio que carga la base de datos seleccionada por el usuario.
+  *
+  */
   loadDatabase() {
     this.manageDictionariesService.readDictionary(this.selectedTemplate.dictionary).subscribe(
         response => {
@@ -137,6 +149,10 @@ export class WizardService {
     );
   }
 
+  /**
+  * Servicio que obtiene las entradas del diccionario seleccionado.
+  *
+  */
   loadRecords() {
     this.manageEntriesService.readAllEntries().subscribe(
       response => {
@@ -147,14 +163,30 @@ export class WizardService {
     )
   }
 
+  /**
+  * Servicio que obtiene todas las plantillas almacenadas en el backend
+  *
+  */
   getTemplates() : Observable<TemplatesResponse>{
     return this.manageTemplatesService.readAllTemplates();
   }
 
+  /**
+  * Servicio que carga la plantilla seleccionada por el usuario.
+  *
+  * @return devuelve la plantilla seleccionada por el usuario de todas las
+  * que se tienen almacenadas por el backend
+  */
   getSelectedTemplate() : Observable<Template>{
     return of(this.selectedTemplate);
   }
 
+  /**
+  * Servicio que obtiene la plantilla seleccionada
+  *
+  * @param option se obtiene el ID de la opción seleccionada por le usuario para
+  * obtener la configuración de base de datos almacenadas.
+  */
   selectTemplate(option : OptionModel) : void{
     if(option){
       let selected = this.templates.find(template => template._id === option._id);
@@ -167,11 +199,22 @@ export class WizardService {
     }
   }
 
+  /**
+  * Servicio el diccionario seleccionado por el usuario.
+  *
+  * @return el diccionario seleccionado por el usuario.
+  *
+  */
   getDictionary() : DictionaryModel{
     //return this.dictionaries.find(dictionary => dictionary._id == this.selectedTemplate.dictionary);
     return this.dictionary;
   }
 
+  /**
+  * Servicio que obtiene las columnas de la base de datos seleccionada.
+  *
+  * @return devuelve las columnas solicitadas de la base de datos seleccionada.
+  */
   getColumns(dictionary: DictionaryModel) : ColumnModel[]{
     let columns : ColumnModel[] = new Array;
     this.records.forEach(record => {
@@ -187,14 +230,34 @@ export class WizardService {
     return columns
   }
 
+  /**
+  * Servicio que obtiene las entradas de la base de datos seleccionada.
+  *
+  * @return Observable<RecordModel[]> Un observable de la respuesta del backend,
+  * la cual contiene las entradas de la base de datos consultada.
+  *
+  */
   getRecords() : Observable<RecordModel[]>{
     return this.records$.asObservable();
   }
 
+  /**
+  * Servicio que obtiene únicamente las entradas seleccionadas dentro de
+  * todas las almacenadas.
+  *
+  * @return Observable<RecordModel> Un observable con respuesta
+  * la cual contine solamente las entradas establecidas en el diccionario.
+  *
+  */
   getSelectedRecord() : Observable<RecordModel>{
     return this.selectedRecord$.asObservable();
   }
 
+  /**
+  * Servicio que establece la tupla de la base de datos que sustituirá dentro
+  * del documento a generar.
+  *
+  */
   selectRecord(row : RecordModel) : void{
     if(this.selectedRecord$.value){
       if(this.selectedRecord$.value._id === row._id){
