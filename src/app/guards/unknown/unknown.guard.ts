@@ -15,6 +15,11 @@ export class UnknownGuard implements CanActivate {
         private loginService: LoginService
     ){}
     
+    /**
+     * Permite realizar las comprobaciones necesarias para determinar
+     * si una ruta es accesible para un usuario o no.
+     *
+    */
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

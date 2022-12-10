@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PdfManagerService } from 'src/app/services/pdf-manager/pdf-manager.service';
+import { WizardService } from 'src/app/services/wizard/wizard.service';
 
 @Component({
   selector: 'app-generate-docs-complete',
@@ -9,15 +10,26 @@ import { PdfManagerService } from 'src/app/services/pdf-manager/pdf-manager.serv
 export class GenerateDocsCompleteComponent implements OnInit {
 
   fileURL : string;
+  selectedTemplate: string;
+  selectedRecord: string;
 
-  constructor(private pdfManager: PdfManagerService) { }
+  constructor(
+    private pdfManager: PdfManagerService,
+    private wizardService: WizardService
+  ) {
+    this.wizardService.getSelectedTemplate().subscribe(
+      response => this.selectedTemplate = response._id
+    )
+    this.wizardService.getSelectedRecord().subscribe(
+      response => this.selectedRecord = response._id
+    )
+  }
 
   ngOnInit(): void {
-    this.pdfManager.readFile("63942c1d7f7ab97e03df0fcb","63870012b2b86a89eeca5cf1").subscribe(
+    let template = this.selectedTemplate;
+    let record = this.selectedRecord;
+    this.pdfManager.readFile(template,record).subscribe(
       response => {
-        /*var fileURL = URL.createObjectURL(response);
-        window.open(fileURL);*/
-        //this.modifyPdf(response)
         var blob = new Blob([response], {type: "application/pdf"});
         this.fileURL = URL.createObjectURL(blob);
         window.open(this.fileURL);
@@ -30,7 +42,5 @@ export class GenerateDocsCompleteComponent implements OnInit {
       window.open(this.fileURL);
     }
   }
-  
-
   
 }

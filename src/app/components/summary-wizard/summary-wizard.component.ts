@@ -19,8 +19,12 @@ export class SummaryWizardComponent implements OnInit {
   record : any;
 
   constructor(private wizardService : WizardService) {
-   }
+  }
 
+  /**
+  * Obtiene los datos que necesita del servicio de Wizard e inicializa sus
+  * atributos.
+  */
   ngOnInit(): void {
     this.selectedTemplate = this.wizardService.getSelectedTemplate();
     this.selectedRecord = this.wizardService.getSelectedRecord();

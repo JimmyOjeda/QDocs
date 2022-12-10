@@ -16,11 +16,18 @@ export class StepsComponent implements OnInit {
 
   constructor(private stepsService: StepsService) { }
 
+  /**
+  * Utiliza el servicio de pasos para obtener el listado de pasos
+  * y conocer el paso actual.
+  */
   ngOnInit(): void {
     this.steps = this.stepsService.getSteps();
     this.currentStep = this.stepsService.getCurrentStep();
   }
 
+  /**
+  * Marca el componente como el paso actual en uso.
+  */
   onStepClick(step: StepModel) {
     this.stepsService.setCurrentStep(step);
   }

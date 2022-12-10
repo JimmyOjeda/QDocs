@@ -15,6 +15,11 @@ export class AgentRoleGuard implements CanActivate {
         private loginService: LoginService
     ){}
 
+    /**
+     * Permite realizar las comprobaciones necesarias para determinar
+     * si una ruta es accesible para un usuario o no.
+     *
+    */
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot

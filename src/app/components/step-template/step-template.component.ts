@@ -16,6 +16,9 @@ export class StepTemplateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+  * Marca como completado el paso correspondiente al componente.
+  */
   onCompleteStep() {
     this.step.isComplete = true;
   }

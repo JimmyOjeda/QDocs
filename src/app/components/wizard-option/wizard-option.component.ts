@@ -19,6 +19,10 @@ export class WizardOptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+  * Checa si este componente es la opción seleccionada, en caso de serlo,
+  * emite un aviso.
+  */
   handleSelection(){
     this.isSelected = !this.isSelected;
     if(this.isSelected){

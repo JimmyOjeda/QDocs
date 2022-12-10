@@ -26,6 +26,10 @@ export class SearchModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+  * Consume el servicio de busqueda para mostrar las definiciones
+  * de las palabras ingresadas por el usuario.
+  */
   search () {
     this.searchDefinition.search(this.inputSearch.value)
     .pipe(
@@ -33,9 +37,12 @@ export class SearchModalComponent implements OnInit {
     ).subscribe();
   }
 
-  showResponse (response: string) {
-    console.log(response);
-    
+  /**
+  * Muestra al usuario en pantalla la respuesta obtenida por el servicio.
+  *
+  * @param response La respuesta obtenida del servicio.
+  */
+  showResponse (response: string) {    
     this.content = response.replace( /(<([^>]+)>)/ig, '');
   }
 

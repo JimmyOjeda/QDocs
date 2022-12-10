@@ -30,6 +30,11 @@ export class RecordWizardComponent implements OnInit {
     console.log(this.dictionaryColumns);
   }
 
+  /**
+  * Remarca la opción seleccionada por el usuario.
+  *
+  * @param row El registro seleccionado por el usuario.
+  */
   handleSelection(row : RecordModel){
     this.wizardService.selectRecord(row);
     const clickedRows = document.getElementsByClassName('demo-row-is-clicked');

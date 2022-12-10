@@ -34,6 +34,10 @@ export class DatabaseSelectionComponent implements OnInit {
     this.loadAllDatabases();
   }
 
+   /**
+  * Consume una función del servicio de bases de datos y obtiene las bases
+  * de datos del backend.
+  */
   loadAllDatabases() {
     this.manageDatabasesService.readAllDatabases()
         .subscribe(
@@ -42,12 +46,21 @@ export class DatabaseSelectionComponent implements OnInit {
         );
   }
 
+   /**
+  * Reinicia las configuraciones del formulario y el servicio de 
+  * selección de opciones.
+  */
   createDatabaseConfiguration () {
     this.modalTitle = "Crear conexión";
     this.databaseForm.reset();
     this.selectOptionService.optionSelected = -1;
   }
 
+  /**
+  * Utiliza el id de la base de datos seleccionada para realizar una consulta
+  * al servicio de bases de datos y así poder mostrar su respectiva información.
+  * @param id El nuevo título de la descripción.
+  */
   loadDatabaseData (id: string) {
     this.modalTitle = "Editar conexión";
     this.databaseForm.reset();
@@ -66,6 +79,11 @@ export class DatabaseSelectionComponent implements OnInit {
         );
   }
 
+  /**
+  * Guarda los datos capturados en el formulario y genera una configuración
+  * de base de datos.
+  * Actualiza la base de datos con el id correspondiente.
+  */
   saveDatabaseConfiguration() {
     let database = {
       id: this.selectOptionService.optionSelected,
@@ -82,6 +100,10 @@ export class DatabaseSelectionComponent implements OnInit {
         );
   }
 
+   /**
+  * Genera un objeto con la configuración de la base de datos a crear 
+  * y utiliza una función del servicio de bases de datos para crearla.
+  */
   addDatabaseConfiguration() {
     this.manageDatabasesService.createDatabase({
       id: this.manageDatabasesService.readAllDatabases.length+1,
@@ -96,6 +118,10 @@ export class DatabaseSelectionComponent implements OnInit {
     );
   }
 
+  /**
+  * Utiliza el servicio de selección de opciones para saber qué 
+  * base de datos eliminar, y procede a eliminarla.
+  */
   removeDatabaseConfiguration () {
     this.manageDatabasesService.deleteDatabase(this.selectOptionService.optionSelected)
         .subscribe(

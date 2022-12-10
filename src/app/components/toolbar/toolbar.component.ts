@@ -16,6 +16,9 @@ export class ToolbarComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    /**
+     * Inicia el servicio de Login para cerrar sesión y cerrar la barra lateral.
+    */
     logout () {
         this.loginService.logout();
         this.toggleSidenavService.close();

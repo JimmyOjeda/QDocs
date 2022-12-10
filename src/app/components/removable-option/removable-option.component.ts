@@ -16,6 +16,9 @@ export class RemovableOptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+  * Utiliza el servicio para comunicar la opción seleccionada por el usuario.
+  */
   updateSelectedOption () {
     this.selectOptionService.updateSelectedOption(this.option._id);
   }
