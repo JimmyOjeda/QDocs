@@ -20,6 +20,10 @@ export class DictionarySelectionComponent implements OnInit {
         this.loadAllDictionaries();
     }
 
+    /**
+     * Carga todos los diccionarios almacenados en el backend mediante
+     * el uso del servicio de diccionarios.
+    */
     loadAllDictionaries() {
         this.manageDictionariesService.readAllDictionaries()
             .subscribe(
@@ -28,6 +32,10 @@ export class DictionarySelectionComponent implements OnInit {
             )
     }
 
+    /**
+     * Elimina en el backend el diccionario seleccionado  mediante
+     * el uso del servicio de diccionarios.
+    */
     removeDictionary() {
         this.manageDictionariesService.deleteDictionary(this.selectOptionService.optionSelected)
             .subscribe(

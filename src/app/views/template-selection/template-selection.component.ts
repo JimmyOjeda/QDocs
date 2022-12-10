@@ -44,6 +44,9 @@ export class TemplateSelectionComponent implements OnInit {
     this.loadAllDictionaries();
   }
 
+   /**
+    * Carga todas las plantillas mediante el uso del servicio de plantillas.
+    */
   loadAllTemplates() {
     this.manageTemplatesService.readAllTemplates()
       .subscribe(
@@ -52,6 +55,9 @@ export class TemplateSelectionComponent implements OnInit {
       );
   }
 
+   /**
+    * Carga todos los diccionarios mediante el uso del servicio de diccionarios.
+    */
   loadAllDictionaries() {
     this.manageDictionariesService.readAllDictionaries().subscribe(
       response => {
@@ -61,12 +67,19 @@ export class TemplateSelectionComponent implements OnInit {
     )
   }
 
+   /**
+    * Reinicia el formulario de creación de plantillas.
+    */
   prepareModalForNewTemplate () {
     this.modalTitle = "Crear plantilla";
     this.templateForm.reset();
     this.selectOptionService.updateSelectedOption(-1);
   }
 
+   /**
+  * Carga los datos de la plantilla seleccionada.
+  * @param id El id de la plantilla a cargar.
+  */
   loadTemplateData (id: string) {
     this.modalTitle = "Editar plantilla";
     this.templateForm.reset();
@@ -85,6 +98,9 @@ export class TemplateSelectionComponent implements OnInit {
     }
   }
 
+   /**
+  * Guarda los datos de la plantilla modificada.
+  */
   saveTemplateConfiguration () {
     let template = {
       _id : this.selectOptionService.optionSelected,
@@ -99,6 +115,9 @@ export class TemplateSelectionComponent implements OnInit {
       )
   }
 
+  /**
+  * Guarda los datos de la plantilla creada.
+  */
   addTemplateConfiguration () {
     this.manageTemplatesService.createTemplate({
       dictionary : this.templateForm.value.dictionary,
@@ -110,6 +129,9 @@ export class TemplateSelectionComponent implements OnInit {
     )
   }
 
+  /**
+  * Elimina la plantilla seleccionada.
+  */
   removeTemplateConfiguration () {
     this.manageTemplatesService.deleteTemplate(this.selectOptionService.optionSelected)
       .subscribe(
@@ -118,6 +140,9 @@ export class TemplateSelectionComponent implements OnInit {
       )
   }
 
+  /**
+  * Guarda localmente el archivo cargado en el formulario.
+  */
   onFileChange(event: any) {
     if (event?.target?.files.length > 0) {
       const file = event.target.files[0];

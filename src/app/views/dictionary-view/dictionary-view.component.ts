@@ -26,6 +26,10 @@ export class DictionaryViewComponent implements OnInit {
         )
     }
 
+     /**
+     * Carga los tokens asignados a los diccionarios creados.
+     *
+    */
     loadEntries() {
         this.entryService.readAllEntries()
         .subscribe(

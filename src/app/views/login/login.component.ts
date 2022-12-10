@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
+     /**
+     * Envia al servicio de login los datos que ingresó el usuario para acceder.
+    */
     sendValues() {
         console.log(this.loginForm.value);
         this.loginService.login(this.loginForm.value.email,this.loginForm.value.password);

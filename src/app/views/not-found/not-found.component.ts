@@ -21,6 +21,9 @@ export class NotFoundComponent implements OnInit {
         this.loginService.loadLogin();
     }
 
+     /**
+     * Redirecciona al usuario a su inicio correspondiente.
+    */
     redirectHome () {
         switch(this.loginService.role) {
             case 'admin': {

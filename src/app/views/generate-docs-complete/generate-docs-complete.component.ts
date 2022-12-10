@@ -37,6 +37,9 @@ export class GenerateDocsCompleteComponent implements OnInit {
     )
   }
 
+   /**
+    * Abre en una nueva pestaña el documento generado.
+  */
   openDocument () {
     if (this.fileURL) {
       window.open(this.fileURL);
